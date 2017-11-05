@@ -22,7 +22,8 @@ namespace DefenceStore.Models
         [Required]
         public uint QuantityInStock { get; set; }
 
-        [ForeignKey("Manufactor")]
+        [Required][ForeignKey("Manufactor")]
         public int ManufactorId { get; set; }
+        public virtual Manufactor Manufactor { get; set; }
     }
 }

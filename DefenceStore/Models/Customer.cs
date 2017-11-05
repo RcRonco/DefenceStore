@@ -8,22 +8,25 @@ namespace DefenceStore.Models
         [Key]
         public int ID { get; set; }
 
-        [Required]
+        [Required, StringLength(30)]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required, StringLength(30)]
         public string LastName { get; set; }
 
         [Required]
         public string Gender { get; set; }
 
-		[DataType(DataType.Date)]
+        [Required]
+        [DataType(DataType.Date)]
 		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 

@@ -12,11 +12,15 @@ namespace DefenceStore.Models
 		[Required]
 		[ForeignKey("Order")]
 		public int OrderID { get; set; }
+        public virtual Order Order { get; set; }
 
-		[Required][ForeignKey("Product")]
+        [Required][ForeignKey("Product")]
 		public int ProductID { get; set; }
+        public virtual Product Product { get; set; }
 
-		[Required]
+        [Required]
 		public uint Quantity { get; set; }
+
+       
     }
 }

@@ -11,9 +11,10 @@ namespace DefenceStore.Models
 		public int ID { get; set; }
 
         [Required][ForeignKey("Customer")]
-		public int CostumerID { get; set; }
+		public int CustomerID { get; set; }
+        public virtual Customer Customer { get; set; }
 
-		[DataType(DataType.Currency)][Required]
+        [DataType(DataType.Currency)][Required]
 		public string BillingType { get; set; }
 
         [Required]
