@@ -11,11 +11,9 @@
 </p>
 <table class="table">
     <tr>
+        <th> Name </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BillingType)
+            Payment Method
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Address)
@@ -36,6 +34,7 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Customer.FirstName)
+            @Html.DisplayFor(modelItem => item.Customer.LastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BillingType)

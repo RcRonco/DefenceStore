@@ -20,7 +20,5 @@ namespace DefenceStore.Models
 
         [Required]
 		public uint Quantity { get; set; }
-
-       
     }
 }
