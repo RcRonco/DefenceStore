@@ -19,6 +19,6 @@ namespace DefenceStore.Models
         public virtual Product Product { get; set; }
 
         [Required]
-		public uint Quantity { get; set; }
+		public int Quantity { get; set; }
     }
 }

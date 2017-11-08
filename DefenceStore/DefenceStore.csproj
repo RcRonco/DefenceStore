@@ -95,6 +95,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Migrations\201711052037353_InitialCreate.cs" />
+    <Compile Include="Migrations\201711052037353_InitialCreate.Designer.cs">
+      <DependentUpon>201711052037353_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081835079_Migration08112017.cs" />
+    <Compile Include="Migrations\201711081835079_Migration08112017.Designer.cs">
+      <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Manufactor.cs" />
@@ -102,7 +111,6 @@
     <Compile Include="Models\OrderProduct.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -111,6 +119,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="SQL Selects\JOIN-Orders-OrderProducts-Products.sql" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -138,6 +147,14 @@
     <Content Include="Views\Manufactors\Edit.cshtml" />
     <Content Include="Views\Manufactors\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711052037353_InitialCreate.resx">
+      <DependentUpon>201711052037353_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081835079_Migration08112017.resx">
+      <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

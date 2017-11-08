@@ -27,10 +27,5 @@ namespace DefenceStore.Models
 
         [Required]
         public float TotalBill { get; set; }
-
-        // ProductID and Quantity
-        // TODO: Check for Tuple support in Entity Framework
-        public ICollection<int> Products { get; set; }
-        public ICollection<int> Quantities { get; set; }
     }
 }

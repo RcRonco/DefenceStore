@@ -19,6 +19,31 @@ namespace DefenceStore.Controllers
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Customer);
+            var order_prd = db.OrderProducts.Include(o => o.Product).Include(o => o.Order);
+
+            /* 
+                SELECT  SUM(Price*Quantity)
+                FROM dbo.Orders 
+	                JOIN dbo.OrderProducts ON dbo.Orders.ID = dbo.OrderProducts.OrderID 
+	                JOIN dbo.Products ON dbo.OrderProducts.ProductID = dbo.Products.ID 
+                WHERE dbo.Orders.ID = 1;
+             */
+            var q = (from ords in orders
+                     join ord_p in order_prd on ords.ID equals ord_p.OrderID
+                     join prd in db.Products on ord_p.ProductID equals prd.ID
+                     select new { ord_p.ID, prd.Price, OPID = ord_p.ID });
+            foreach (Order o in orders)
+            {
+                o.TotalBill = 0;
+                var q_list = q.Where(q_i => q_i.ID == o.ID).ToList();
+                q_list.ForEach(q_i => {
+                    var x = order_prd.Where(op => op.ID == q_i.OPID).ToList();
+                    var quant = order_prd.Where(op => op.ID == q_i.OPID).First().Quantity;
+                    o.TotalBill += q_i.Price * quant;
+                });
+            }
+
+
             return View(orders.ToList());
         }
 
