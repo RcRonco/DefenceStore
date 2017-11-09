@@ -139,6 +139,7 @@
     <Content Include="Views\OrderProducts\Edit.cshtml" />
     <Content Include="Views\OrderProducts\Index.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
+    <Content Include="Views\OrderProducts\SearchEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
