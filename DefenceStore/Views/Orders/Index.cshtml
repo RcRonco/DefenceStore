@@ -47,7 +47,7 @@
                     @Html.DisplayFor(modelItem => item.Desciption)
                 </td>
                 <td>
-                    @Html.ActionLink(item.TotalBill.ToString(), "Index", new { orderID = item.ID})
+                    @Html.ActionLink(item.TotalBill.ToString(), "Search", "OrderProducts", new { item.ID }, null)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

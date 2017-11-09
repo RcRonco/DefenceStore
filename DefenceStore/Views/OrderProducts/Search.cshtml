@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DefenceStore.Models.OrderProduct>
+
+@{
+    ViewBag.Title = "Products in Order " + Model.FirstOrDefault().OrderID.ToString();
+}
+
+<h2>
+    Products in order: @Html.DisplayFor(modelItem => Model.FirstOrDefault().OrderID)
+</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th> Total Price</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </th>
+            <th>
+                @(item.Quantity * item.Product.Price)
+            </th>
+        </tr>
+    }
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FirstOrDefault().OrderID)
+        </td>
+        <td> Sum </td><td> - </td><td> - </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.FirstOrDefault().Order.TotalBill)
+        </td>
+    </tr>
+
+</table>

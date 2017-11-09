@@ -19,31 +19,13 @@ namespace DefenceStore.Controllers
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Customer);
-            var order_prd = db.OrderProducts.Include(o => o.Product).Include(o => o.Order);
 
-            /* 
-                SELECT  SUM(Price*Quantity)
-                FROM dbo.Orders 
-	                JOIN dbo.OrderProducts ON dbo.Orders.ID = dbo.OrderProducts.OrderID 
-	                JOIN dbo.Products ON dbo.OrderProducts.ProductID = dbo.Products.ID 
-                WHERE dbo.Orders.ID = 1;
-             */
-            var q = (from ords in orders
-                     join ord_p in order_prd on ords.ID equals ord_p.OrderID
-                     join prd in db.Products on ord_p.ProductID equals prd.ID
-                     select new { ord_p.ID, prd.Price, OPID = ord_p.ID });
-            foreach (Order o in orders)
-            {
-                o.TotalBill = 0;
-                var q_list = q.Where(q_i => q_i.ID == o.ID).ToList();
-                q_list.ForEach(q_i => {
-                    var x = order_prd.Where(op => op.ID == q_i.OPID).ToList();
-                    var quant = order_prd.Where(op => op.ID == q_i.OPID).First().Quantity;
-                    o.TotalBill += q_i.Price * quant;
-                });
+            foreach (Order o in orders) {
+               float res = calculateTotalBill(o);
             }
+                
 
-
+            db.SaveChanges();
             return View(orders.ToList());
         }
 
@@ -117,6 +99,7 @@ namespace DefenceStore.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName", order.CustomerID);
+            calculateTotalBill(order);
             return View(order);
         }
 
@@ -132,6 +115,7 @@ namespace DefenceStore.Controllers
             {
                 return HttpNotFound();
             }
+            calculateTotalBill(order);
             return View(order);
         }
 
@@ -141,6 +125,7 @@ namespace DefenceStore.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Order order = db.Orders.Find(id);
+            db.OrderProducts.RemoveRange(db.OrderProducts.Where(op => op.OrderID == order.ID));
             db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -153,6 +138,34 @@ namespace DefenceStore.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected float calculateTotalBill(Order order)
+        {
+            var orders = db.Orders.Include(o => o.Customer);
+            var order_prd = db.OrderProducts.Include(o => o.Product).Include(o => o.Order);
+
+            /* 
+                SELECT dbo.Orders.ID, dbo.Products.Desciption, dbo.OrderProducts.ID
+                FROM dbo.Orders 
+	                JOIN dbo.OrderProducts ON dbo.Orders.ID = dbo.OrderProducts.OrderID 
+	                JOIN dbo.Products ON dbo.OrderProducts.ProductID = dbo.Products.ID 
+             */
+             
+             var q = (from ords in orders
+                      join ord_p in order_prd on ords.ID equals ord_p.OrderID
+                      join prd in db.Products on ord_p.ProductID equals prd.ID
+                      select new { ords.ID, prd.Price, OPID = ord_p.ID });
+
+             order.TotalBill = 0;
+             var q_list = q.Where(q_i => q_i.ID == order.ID).ToList();
+             q_list.ForEach(q_i => {
+                var x = order_prd.Where(op => op.ID == q_i.OPID).ToList();
+                var quant = order_prd.Where(op => op.ID == q_i.OPID).First().Quantity;
+                order.TotalBill += q_i.Price * quant;
+             });
+
+             return order.TotalBill;
         }
     }
 }
