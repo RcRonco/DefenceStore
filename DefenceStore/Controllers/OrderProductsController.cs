@@ -54,6 +54,23 @@ namespace DefenceStore.Controllers
             return View(orderProduct);
         }
 
+        // GET: OrderProducts/Details/5
+        public ActionResult SearchEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var orderProduct = db.OrderProducts.Where(op => op.OrderID == id).Include(op => op.Product).Include(op => op.Order).AsEnumerable();
+
+            if (orderProduct == null || orderProduct.Count() < 1)
+            {
+                return HttpNotFound();
+            }
+            return View(orderProduct);
+        }
+
         // GET: OrderProducts/Create
         public ActionResult Create()
         {
@@ -128,6 +145,7 @@ namespace DefenceStore.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(orderProduct);
         }
 
@@ -137,6 +155,7 @@ namespace DefenceStore.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             OrderProduct orderProduct = db.OrderProducts.Find(id);
+            orderProduct.Order.TotalBill -= orderProduct.Quantity * orderProduct.Product.Price;
             db.OrderProducts.Remove(orderProduct);
             db.SaveChanges();
             return RedirectToAction("Index");

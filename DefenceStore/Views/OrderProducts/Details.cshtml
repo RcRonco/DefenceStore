@@ -11,21 +11,40 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Order.BillingType)
+            @Html.DisplayNameFor(model => model.Order.ID)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Order.BillingType)
+            @Html.DisplayFor(model => model.Order.ID)
+        </dd>
+
+        <dt> Customer </dt>
+        <dd>
+            @(Model.Order.Customer.FirstName + " " + Model.Order.Customer.LastName)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Product.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Product.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt> Total </dt>
+        <dd>
+            @(Model.Quantity * Model.Product.Price)
+        </dd>
     </dl>
 </div>
 <p>

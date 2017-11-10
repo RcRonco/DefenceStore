@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Order</h4>
         <hr />
@@ -56,15 +56,6 @@
                 @Html.ValidationMessageFor(model => model.Desciption, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalBill, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalBill, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalBill, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -72,10 +63,11 @@
         </div>
     </div>
 }
+<br/>
 <div>
-
+        @{ Html.RenderAction("SearchEdit", "OrderProducts", Model.ID); }
 </div>
-
+<h4>Total: @Html.DisplayFor(modelItem => Model.TotalBill) </h4>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

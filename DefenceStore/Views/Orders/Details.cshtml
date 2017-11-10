@@ -57,8 +57,10 @@
         <dd>
             @Html.DisplayFor(model => model.TotalBill)
         </dd>
-
     </dl>
+</div>
+<div>
+    @{ Html.RenderAction("Search", "OrderProducts", Model.ID); }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
