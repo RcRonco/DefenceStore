@@ -1,1 +1,41 @@
-﻿<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div style="position: relative;">
+    <canvas id="canvas" width="1000" height="250"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var imageObj = new Image();
+
+        imageObj.onload = function() {
+            context.drawImage(imageObj, 0, 0);
+        };
+
+        imageObj.src = '../../notyet.jpg';
+    </script>
+    <div style="position: absolute; bottom: 0; left: 10px">
+        <h1 style="color: white; text-shadow: indigo 1px; vertical-align: bottom">
+            Recipes
+        </h1>
+        <h4 style="color: white; vertical-align: bottom">
+            Test Test Test
+        </h4>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-6" style="padding-right: 40px;">
+        <h2>Getting started</h2>
+        <br />
+        <p>
+            Still a Test
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Our Best Tests</h2>
+        <video width="300" height="240" controls>
+            <source src="~/Content/Tasty.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>

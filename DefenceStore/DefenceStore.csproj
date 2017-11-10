@@ -86,6 +86,8 @@
     <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthorizationCheck.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManufactorsController.cs" />
     <Compile Include="Controllers\OrderProductsController.cs" />
@@ -140,6 +142,13 @@
     <Content Include="Views\OrderProducts\Index.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
     <Content Include="Views\OrderProducts\SearchEdit.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Shared\_LimitedLogin.cshtml" />
+    <Content Include="Views\Customers\CustLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

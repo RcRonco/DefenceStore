@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace DefenceStore.Models
@@ -37,7 +38,7 @@ namespace DefenceStore.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
+        [DisplayName("Administrator")]
         public bool IsAdmin { get; set; }
     }
 }
