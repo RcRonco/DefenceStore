@@ -18,10 +18,10 @@ namespace DefenceStore.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            if (AuthorizationCheck.AdminAuthorized(Session))
-            {
+            //if (AuthorizationCheck.AdminAuthorized(Session))
+            //{
                 return View(db.Customers.ToList());
-            }
+            //}
 
             return RedirectToAction("Index", "Home");
         }
