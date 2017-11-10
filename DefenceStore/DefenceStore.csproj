@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="BU-Migrations\" />
     <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +96,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Helpers\Statistics-Helper.cs" />
     <Compile Include="Migrations\201711052037353_InitialCreate.cs" />
     <Compile Include="Migrations\201711052037353_InitialCreate.Designer.cs">
       <DependentUpon>201711052037353_InitialCreate.cs</DependentUpon>

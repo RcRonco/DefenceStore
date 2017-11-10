@@ -22,8 +22,7 @@ namespace DefenceStore.Controllers
 
             foreach (Order o in orders) {
                float res = calculateTotalBill(o);
-            }
-                
+            }        
 
             db.SaveChanges();
             return View(orders.ToList());
