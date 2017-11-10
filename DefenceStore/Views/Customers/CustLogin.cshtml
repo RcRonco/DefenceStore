@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<div class="container-fluid">
+    <div style="display: block; padding: 10px;" align="center">
+        @using (Html.BeginForm("Login", "Customers"))
+            {
+            @Html.AntiForgeryToken()
+
+            <h3>Enter your details to log in</h3>
+            <br />
+
+            <div class="form-group">
+                <input type="text" name="clientname" class="form-control" placeholder="Logon Name">
+                <br />
+                <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
+
+            <button type="submit" class="btn btn-default" style="margin-right: 20px">Sign in</button>
+            <a href="~/Clients/Create">Register</a>
+        }
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@{
+    DefenceStore.Models.Customer cust = ((DefenceStore.Models.Customer)Session["Client"]);
+}
+<ul class="navbar-nav bd-navbar-nav flex-row navbar-right">
+    @if (cust == null)
+    {
+        <li class="nav-item">
+            @Html.ActionLink("Register", "Create", "Customers", new { area = "" }, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Login", "CustLogin", "Customers", new { area = "" }, new { @class = "nav-link" })
+        </li>
+    }
+    else
+    {
+        <li class="nav-item" style="margin-top: 6px; margin-right: 20px">
+            <a style="color: white !important; font-size: 18px; pointer-events: none;" href="#">
+                Welcome @(cust.FirstName + " " + cust.LastName)
+            </a>
+        </li>
+        <li class="nav-item" style="margin-right: 10px">
+            @Html.ActionLink("Log Out", "Logout", "Customers", new { area = "" }, new { @class = "nav-link" })
+        </li>
+    }
+</ul>

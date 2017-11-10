@@ -1,9 +1,49 @@
-﻿<!DOCTYPE html>
+﻿@{
+    DefenceStore.Models.Customer cust = (DefenceStore.Models.Customer)Session["Client"];
+}
+<!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Recipes</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
-	@RenderBody()
+    <header class="navbar navbar-dark flex-column flex-md-row bd-navbar">
+        <div class="navbar-header">
+            @Html.ActionLink("Recipes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                @if (cust != null && cust.IsAdmin)
+                {
+                    <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
+                }
+            </ul>
+        </div>
+        @Html.Partial("_LimitedLogin")
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <center>
+            <div id="temperatureDiv">
+                <br /><hr />
+                <h4>Weather in Rishon Lezion</h4>
+                <p>getting info...</p>
+            </div>
+        </center>
+        <!-- Weather webservice -->
+        <script src="~/Scripts/weather.js"></script>
+        <script src="https://query.yahooapis.com/v1/public/yql?q=select item, wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='Rishon LeZion, il') and u='c'&format=json&callback=weatherCallback"></script>
+        <hr />
+        <footer>
+            <center>
+                <p>&copy; @DateTime.Now.Year - EST - IDF </p>
+            </center>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
