@@ -131,11 +131,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\editIcon.png" />
-    <Content Include="Content\detailsIcon.png" />
-    <Content Include="Content\deleteIcon.png" />
-    <Content Include="Content\addIcon.png" />
-    <Content Include="Content\main.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -222,6 +217,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Orders\CreateOrder.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
+    <Content Include="Views\Customers\FailedLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
