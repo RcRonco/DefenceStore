@@ -50,11 +50,11 @@
                     @Html.ActionLink(item.TotalBill.ToString(), "Search", "OrderProducts", new { item.ID }, null)
                 </td>
                 <td>
+                    @Html.ActionLink("SearchEdit", "SearchEdit", "OrderProducts", new { id = item.ID }) |
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                     @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 </td>
                 </tr>
         }
-
     </table>

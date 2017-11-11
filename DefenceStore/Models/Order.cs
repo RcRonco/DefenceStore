@@ -27,5 +27,7 @@ namespace DefenceStore.Models
 
         [Required]
         public float TotalBill { get; set; }
+
+        public List<OrderProduct> products { get; set; }
     }
 }

@@ -46,10 +46,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        <td>    
+            @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })
+            @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
+            @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" })
+            @Html.ActionLink(".", "Details", new { id=item.ID }, new { @class = "details" })
         </td>
     </tr>
 }

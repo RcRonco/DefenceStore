@@ -51,7 +51,7 @@ namespace DefenceStore.Controllers
             {
                 return HttpNotFound();
             }
-            return View(orderProduct);
+            return PartialView(orderProduct);
         }
 
         // GET: OrderProducts/Details/5
@@ -68,7 +68,7 @@ namespace DefenceStore.Controllers
             {
                 return HttpNotFound();
             }
-            return View(orderProduct);
+            return PartialView(orderProduct);
         }
 
         // GET: OrderProducts/Create

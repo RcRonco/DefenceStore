@@ -11,12 +11,12 @@ namespace DefenceStore.Controllers
     {
         public static bool Authorized(HttpSessionStateBase session)
         {
-            return (Customer)session["Client"] != null;
+            return (Customer)session["Customer"] != null;
         }
 
         public static bool AdminAuthorized(HttpSessionStateBase session)
         {
-            return Authorized(session) && ((Customer)session["Client"]).IsAdmin;
+            return Authorized(session) && ((Customer)session["Customer"]).IsAdmin;
         }
     }
 }

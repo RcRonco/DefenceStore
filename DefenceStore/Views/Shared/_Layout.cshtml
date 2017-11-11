@@ -1,18 +1,22 @@
-﻿@{
-    DefenceStore.Models.Customer cust = (DefenceStore.Models.Customer)Session["Client"];
+@{
+    DefenceStore.Models.Customer cust = (DefenceStore.Models.Customer)Session["Customer"];
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Recipes</title>
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <title>@ViewBag.Title - Defence Store</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>\
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link href="~/Content/main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <header class="navbar navbar-dark flex-column flex-md-row bd-navbar">
         <div class="navbar-header">
-            @Html.ActionLink("Recipes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Defence Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav bd-navbar-nav flex-row">
