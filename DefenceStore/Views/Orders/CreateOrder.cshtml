@@ -2,9 +2,9 @@
 
 @{
     ViewBag.Title = "Edit";
-    Html.HiddenFor(m => m.products);
-    Html.HiddenFor(m => m.Customer);
-    Html.HiddenFor(m => m.TotalBill);
+    //Html.HiddenFor(m => m.products);
+    //Html.HiddenFor(m => m.Customer);
+    //Html.HiddenFor(m => m.TotalBill);
 }
 
 <h2>Edit</h2>
@@ -24,10 +24,6 @@
             <div class="col-md-10">
                 @Html.DropDownList("CustomerID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.ID)
-                @Html.HiddenFor(model => model.Customer)
-                @Html.HiddenFor(model => model.Customer.FirstName)
-                @Html.HiddenFor(model => model.Customer.LastName)
             </div>
         </div>
 
@@ -36,7 +32,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BillingType, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.BillingType, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.TotalBill)
             </div>
         </div>
 
@@ -85,8 +80,6 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => Model.products[i].OrderID)
-                        @Html.HiddenFor(model => Model.products[i].ID)
-                        @Html.HiddenFor(model => Model.products[i].OrderID)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => Model.products[i].Product.Name)
@@ -94,7 +87,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => Model.products[i].Product.Price)
-                        @Html.HiddenFor(model => Model.products[i].Product.Price)
                     </td>
                     <th>
                         <div class="form-group">
