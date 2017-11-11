@@ -1,5 +1,5 @@
 ﻿@{
-    DefenceStore.Models.Customer cust = (DefenceStore.Models.Customer)Session["Client"];
+    DefenceStore.Models.Customer cust = (DefenceStore.Models.Customer)Session["Customer"];
 }
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,6 @@
                 {
                     <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
                 }
-                <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
         </div>
         @Html.Partial("_LimitedLogin")

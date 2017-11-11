@@ -18,7 +18,7 @@ namespace DefenceStore.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            //if (AuthorizationCheck.AdminAuthorized(Session))
+            if (AuthorizationCheck.AdminAuthorized(Session))
             {
                 return View(db.Customers.ToList());
             }
@@ -29,7 +29,7 @@ namespace DefenceStore.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
-            //if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
+            if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
             if (id == null)
             {
@@ -76,7 +76,7 @@ namespace DefenceStore.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
-            //if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
+            if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
             if (id == null)
             {
@@ -100,7 +100,7 @@ namespace DefenceStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,IsAdmin")] Customer customer)
         {
-            //if(!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
+            if(!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
             if (!ModelState.IsValid) return View(customer);
 
