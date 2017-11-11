@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DefenceStore.DAL;
 using DefenceStore.Models;
+using System.Reflection;
 
 namespace DefenceStore.Controllers
 {
@@ -15,9 +16,53 @@ namespace DefenceStore.Controllers
     {
         private DefenceStoreContext db = new DefenceStoreContext();
 
+        public object TypeUtils { get; private set; }
+
         // GET: Manufactors
         public ActionResult Index()
         {
+            /*
+             -------------------------------------------
+             SQL Syntax:
+             -------------------------------------------
+             SELECT name, count(name) FROM people
+             GROUP by name 
+             
+            -------------------------------------------
+            Linq Method 1:
+            -------------------------------------------
+            var query = from p in context.People
+            group p by p.name into g
+            select new
+            {
+              name = g.Key,
+              count = g.Count()
+            };
+
+            -------------------------------------------
+            Linq Method 2:
+            -------------------------------------------
+            var query = context.People
+                   .GroupBy(p => p.name)
+                   .Select(g => new { name = g.Key, count = g.Count() });
+
+            
+
+            var productsOfManufactors = (from products in db.Products
+                                        group products by products.ManufactorId into manufactor
+                                        select new { id = manufactor.Key, count = manufactor.Count() }).ToArray();
+
+            /*
+            Type t = productsOfManufactors.GetType();
+            //This answer is long overdue for an update for C# 4:
+            dynamic d = productsOfManufactors;
+            
+            ViewBag.productsOfManufactors = productsOfManufactors; 
+            
+            */
+
+            UpdateTotalProducts();
+
             return View(db.Manufactors.ToList());
         }
 
@@ -35,6 +80,32 @@ namespace DefenceStore.Controllers
             }
             return View(manufactor);
         }
+
+    // GET: Manufactors/Search/
+    public ActionResult Search(string name, string description, int? totalProduct)
+    {
+        UpdateTotalProducts();
+
+        var manufactors = (from m in db.Manufactors
+                          select m).ToList();
+  
+        if (!String.IsNullOrEmpty(name))
+        {
+            manufactors = manufactors.Where(m => m.Name.Contains(name)).ToList();
+        }
+
+        if (!String.IsNullOrEmpty(description))
+        {
+            manufactors = manufactors.Where(m => m.Desciption.Contains(description)).ToList();
+        }
+
+        if (totalProduct >= 0)
+        {
+            manufactors = manufactors.Where(m => m.TotalProduct.Equals(totalProduct)).ToList();
+        }
+
+        return View(manufactors);
+    }
 
         // GET: Manufactors/Create
         public ActionResult Create()
@@ -123,6 +194,27 @@ namespace DefenceStore.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected void UpdateTotalProducts()
+        {
+            var manufactors = from man in db.Manufactors
+                              select man;
+
+            var productsOfManufactors = (from products in db.Products
+                                         group products by products.ManufactorId into manufactor
+                                         select new { id = manufactor.Key, count = manufactor.Count() }).ToArray();
+
+           foreach(var pom in productsOfManufactors)
+            {
+                var pomID = pom.GetType().GetProperty("id").GetValue(pom, null);
+                var pomCount = pom.GetType().GetProperty("count").GetValue(pom, null);
+
+                Manufactor manufactor = db.Manufactors.Find(pomID);
+                manufactor.TotalProduct = (int)pomCount;
+            }
+
+            db.SaveChanges();
         }
     }
 }
