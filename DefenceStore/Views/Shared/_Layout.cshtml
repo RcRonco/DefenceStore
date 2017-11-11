@@ -6,13 +6,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Recipes</title>
+    <title>@ViewBag.Title - Defence Store</title>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
     <header class="navbar navbar-dark flex-column flex-md-row bd-navbar">
         <div class="navbar-header">
-            @Html.ActionLink("Recipes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Defence Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav bd-navbar-nav flex-row">
@@ -21,6 +21,7 @@
                 {
                     <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
                 }
+                <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
             </ul>
         </div>
         @Html.Partial("_LimitedLogin")

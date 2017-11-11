@@ -19,9 +19,9 @@ namespace DefenceStore.Controllers
         public ActionResult Index()
         {
             //if (AuthorizationCheck.AdminAuthorized(Session))
-            //{
+            {
                 return View(db.Customers.ToList());
-            //}
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -29,7 +29,7 @@ namespace DefenceStore.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
-            if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
+            //if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
             if (id == null)
             {
@@ -68,7 +68,7 @@ namespace DefenceStore.Controllers
             db.Customers.Add(customer);
             db.SaveChanges();
 
-            //TODO : Redirect to login
+            return RedirectToAction("CustLogin", "Customer");
 
             return View(customer);
         }
@@ -76,7 +76,7 @@ namespace DefenceStore.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
+            //if (!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
             if (id == null)
             {
@@ -100,7 +100,7 @@ namespace DefenceStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,IsAdmin")] Customer customer)
         {
-            if(!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
+            //if(!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
             if (!ModelState.IsValid) return View(customer);
 
@@ -152,12 +152,12 @@ namespace DefenceStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "ClientName,Password")] Customer customer)
+        public ActionResult Login([Bind(Include = "Username,Password")] Customer customer)
         {
             var pass = customer.Password;
-            var logonName = customer.Username;
+            var username = customer.Username;
 
-            var requestedClient = db.Customers.SingleOrDefault(u => u.Username.Equals(logonName) && u.Password.Equals(pass));
+            var requestedClient = db.Customers.SingleOrDefault(u => u.Username.Equals(username) && u.Password.Equals(pass));
 
             if (requestedClient == null)
             {
