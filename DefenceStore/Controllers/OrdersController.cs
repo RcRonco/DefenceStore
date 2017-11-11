@@ -43,6 +43,62 @@ namespace DefenceStore.Controllers
             return View(order);
         }
 
+        public ActionResult CreateOrder(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<Product> products = Session["Products"] as List<Product>;
+
+            if (products == null)
+            {
+                return HttpNotFound();
+            }
+
+            Order order = new Order();
+            order.CustomerID = id.Value;
+            order.Customer = db.Customers.Find(id);
+
+            var UserOrders = db.Orders.Where(o => o.CustomerID == id.Value).ToList<Order>();
+            
+
+            order.Date = DateTime.Now;
+            order.BillingType = UserOrders[UserOrders.Count - 1].BillingType;
+            order.Address = UserOrders[UserOrders.Count - 1].Address;
+            order.products = new List<OrderProduct>();
+
+            foreach (Product prod in products)
+            {
+                order.products.Add(new OrderProduct
+                {
+                    Product = prod,
+                    ProductID = prod.ID,
+                    Order = order,
+                    OrderID = order.ID,
+                    Quantity = 1
+                });
+            }
+
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
+            return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOrder(Order order)
+        {
+            if (isValid(order))
+            {
+                
+
+                return RedirectToAction("Index");
+            }
+            
+            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
+            return View(order);
+        }
+
         // GET: Orders/Create
         public ActionResult Create()
         {
@@ -81,7 +137,23 @@ namespace DefenceStore.Controllers
                 return HttpNotFound();
             }
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName", order.CustomerID);
+            order.products = db.OrderProducts.Where(op => op.OrderID == order.ID).ToList();
+            calculateTotalBill(order);
             return View(order);
+        }
+
+        private bool isValid(Order order)
+        {
+            if (order.Address == string.Empty || order.BillingType == string.Empty)
+                return false;
+
+            foreach (OrderProduct op in order.products)
+            {
+                if (op.Quantity < 1 || op.Product.Price < 1 || op.Quantity > op.Product.QuantityInStock)
+                    return false;
+            }
+            
+            return true;
         }
 
         // POST: Orders/Edit/5
@@ -89,16 +161,25 @@ namespace DefenceStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CustomerID,BillingType,Address,Date,Desciption,TotalBill")] Order order)
+        public ActionResult Edit(Order order)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(order).State = EntityState.Modified;
+            if (isValid(order)) {
+                order.Customer = db.Customers.Find(order.CustomerID);
+
+                var ops = db.OrderProducts.Where(op => order.ID == op.OrderID);
+                foreach (var cop in order.products)
+                {
+                    OrderProduct top = ops.Where(op => op.ID == cop.ID).First();
+                    top.Quantity = cop.Quantity;
+                }
+
+                calculateTotalBill(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName", order.CustomerID);
-            calculateTotalBill(order);
+
             return View(order);
         }
 

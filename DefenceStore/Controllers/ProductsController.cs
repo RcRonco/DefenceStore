@@ -44,6 +44,30 @@ namespace DefenceStore.Controllers
             return View();
         }
 
+        public ActionResult Add(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var prod = db.Products.Find(id);
+            
+            if (prod == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (Session["Products"] == null)
+            {
+                Session.Add("Products", new List<Product>());
+            }
+
+            (Session["Products"] as List<Product>).Add(prod);
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
         // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

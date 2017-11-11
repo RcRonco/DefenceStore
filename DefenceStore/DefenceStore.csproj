@@ -108,12 +108,21 @@
     <Compile Include="Migrations\201711081835079_Migration08112017.Designer.cs">
       <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711111242589_Migration11112017.cs" />
+    <Compile Include="Migrations\201711111242589_Migration11112017.Designer.cs">
+      <DependentUpon>201711111242589_Migration11112017.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711111245426_Migration111120172.cs" />
+    <Compile Include="Migrations\201711111245426_Migration111120172.Designer.cs">
+      <DependentUpon>201711111245426_Migration111120172.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Manufactor.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -147,6 +156,10 @@
     <Content Include="Scripts\d3\CHANGES.md" />
     <Content Include="Scripts\d3\API.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -181,13 +194,7 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
-    <Content Include="Views\OrderProducts\Create.cshtml" />
     <Content Include="Views\OrderProducts\Delete.cshtml" />
-    <Content Include="Views\OrderProducts\Details.cshtml" />
-    <Content Include="Views\OrderProducts\Edit.cshtml" />
-    <Content Include="Views\OrderProducts\Index.cshtml" />
-    <Content Include="Views\OrderProducts\Search.cshtml" />
-    <Content Include="Views\OrderProducts\SearchEdit.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\Customers\Delete.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
@@ -208,6 +215,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Orders\CreateOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -223,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711081835079_Migration08112017.resx">
       <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111242589_Migration11112017.resx">
+      <DependentUpon>201711111242589_Migration11112017.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711111245426_Migration111120172.resx">
+      <DependentUpon>201711111245426_Migration111120172.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
