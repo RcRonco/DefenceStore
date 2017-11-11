@@ -1,19 +1,26 @@
 ﻿@model IEnumerable<DefenceStore.Models.Manufactor>
 
-@*
-    @{
-        Layout = "~/Views/Shared/_ManageLayout.cshtml";
-    }
-*@
-   @{
-        ViewBag.Title = "Search - Manufactor";
-    }
+@{
+    ViewBag.Title = "Index";
+}
 
-    <h2>View</h2>
+<h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+<p>
+    @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm("Search", "Manufactors", FormMethod.Get))
+    {
+        <p>
+            Name: @Html.TextBox("name")
+            Description @Html.TextBox("description")
+            @*Number of Products: @Html.TextBox("totalProduct", new { type="number", min="0", max="100" })  *@
+            Number of Products: <input type="number" min="0" step="1" name="totalProduct" id="totalProduct" />
+            <input type="submit" value="Filter" />
+        </p>
+     }
+
+
     <table class="table">
         <tr>
             <th>
@@ -23,28 +30,52 @@
                 @Html.DisplayNameFor(model => model.Desciption)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TotalProduct)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Logo)
             </th>
             <th></th>
         </tr>
-
-    @foreach (var item in Model) {
+    @if (Model.Any())
+    { 
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desciption)
+                </td>
+                @*
+                    <td>
+                        @{
+                            var profman = ViewBag.productsOfManufactors[item.ID-1];
+                        }
+                        @profman.GetType().GetProperty("count").GetValue(profman, null)
+                    </td>
+                *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Logo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desciption)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Logo)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                No Results Found!
             </td>
         </tr>
     }
-
     </table>
