@@ -1,0 +1,42 @@
+﻿body {
+}
+
+th {
+    background: #39434a;
+    color: white;
+}
+td {
+    min-width: 110px;
+}
+a.edit {
+    background: url(./editIcon.png) no-repeat top left;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px; /* hides the link text */
+    color: rgba(0,0,0,0);
+    display: inline-flex
+}
+a.add {
+    background: url(./addIcon.png) no-repeat top left;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px; /* hides the link text */
+    color: rgba(0,0,0,0);
+    display: inline-flex
+}
+a.delete {
+    background: url(./deleteIcon.png) no-repeat top left;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px; /* hides the link text */
+    color: rgba(0,0,0,0);
+    display: inline-flex
+}
+a.details {
+    background: url(./detailsIcon.png) no-repeat top left;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px; /* hides the link text */
+    color: rgba(0,0,0,0);
+    display: inline-flex
+}
