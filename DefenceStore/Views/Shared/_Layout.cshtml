@@ -1,4 +1,4 @@
-@{
+﻿@{
     DefenceStore.Models.Customer cust = (DefenceStore.Models.Customer)Session["Customer"];
 }
 <!DOCTYPE html>
@@ -9,26 +9,30 @@
     <title>@ViewBag.Title - Defence Store</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>\
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link href="~/Content/main.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <header class="navbar navbar-dark flex-column flex-md-row bd-navbar">
-        <div class="navbar-header">
-            @Html.ActionLink("Defence Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-        <div class="navbar-nav-scroll">
-            <ul class="navbar-nav bd-navbar-nav flex-row">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+    <nav class="navbar navbar-light customNavbar" >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand navLink">@Html.ActionLink("Defence Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand navLink" })</a>
+            </div>
+            <ul class="nav navbar-nav">
+
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navLink" })</li>
+                <li class="nav-item">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navLink" })</li>
                 @if (cust != null && cust.IsAdmin)
                 {
-                    <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Users", "Index", "Customers", new { area = "" }, new { @class = "navLink" })</li>
                 }
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @Html.Partial("_LimitedLogin")
+            </ul>
         </div>
-        @Html.Partial("_LimitedLogin")
-    </header>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <center>

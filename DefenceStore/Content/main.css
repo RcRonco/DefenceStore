@@ -40,3 +40,28 @@ a.details {
     color: rgba(0,0,0,0);
     display: inline-flex
 }
+
+.bd-navbar {
+    min-height: 4rem;
+    background-color: #563d7c;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+
+.bd-navbar .navbar-nav .nav-link {
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #cdbfe3;
+}
+
+.navbar {
+    border-radius: 0px !important;
+}
+
+.navLink {
+    color: white;
+}
+
+.customNavbar {
+    background-color: #43A047 !important;
+    color: white;
+}
