@@ -43,9 +43,9 @@ namespace DefenceStore.Controllers
             return View(order);
         }
 
-        public ActionResult CreateOrder(int? id)
+        public ActionResult CreateOrder(int? cid)
         {
-            if (id == null)
+            if (cid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -57,10 +57,10 @@ namespace DefenceStore.Controllers
             }
 
             Order order = new Order();
-            order.CustomerID = id.Value;
-            order.Customer = db.Customers.Find(id);
+            order.CustomerID = cid.Value;
+            order.Customer = db.Customers.Find(cid);
 
-            var UserOrders = db.Orders.Where(o => o.CustomerID == id.Value).ToList<Order>();
+            var UserOrders = db.Orders.Where(o => o.CustomerID == cid.Value).ToList<Order>();
             
 
             order.Date = DateTime.Now;
@@ -90,8 +90,38 @@ namespace DefenceStore.Controllers
         {
             if (isValid(order))
             {
+                if (order.Desciption == null)
+                    order.Desciption = "";
+
+                order.Customer = db.Customers.Find(order.CustomerID);
+
+                foreach (OrderProduct p in order.products)
+                {
+                    var product = db.Products.Find(p.ProductID);
+                    p.Product = product;
+                    order.TotalBill += p.Product.Price * p.Quantity;
+                }
+                List<OrderProduct> op = order.products;
+                order.products = null;
+
+                if (ModelState.IsValid)
+                {
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+                }
                 
 
+                for (int i = 0; i < op.Count; i++)
+                {
+                    op[i].Order = order;
+                    op[i].OrderID = order.ID;
+                }
+
+                db.OrderProducts.AddRange(op);
+
+                db.SaveChanges();
+
+                Session.Remove("Products");
                 return RedirectToAction("Index");
             }
             
@@ -149,7 +179,8 @@ namespace DefenceStore.Controllers
 
             foreach (OrderProduct op in order.products)
             {
-                if (op.Quantity < 1 || op.Product.Price < 1 || op.Quantity > op.Product.QuantityInStock)
+                var p = db.Products.Find(op.ProductID);
+                if (op.Quantity < 1 || p.Price < 1 /*|| op.Quantity > p.QuantityInStock*/)
                     return false;
             }
             

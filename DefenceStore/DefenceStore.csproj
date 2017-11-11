@@ -216,6 +216,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Orders\CreateOrder.cshtml" />
+    <Content Include="Views\OrderProducts\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
