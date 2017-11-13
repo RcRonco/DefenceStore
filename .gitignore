@@ -39,3 +39,7 @@ Thumbs.db
 # dotCover
 *.dotCover
 /DefenceStore/ClassDiagram1.cd
+/DefenceStore/App_Data/DefenceStore.DAL.DefenceStoreContext.bak.mdf
+/DefenceStore/App_Data/DefenceStore.DAL.DefenceStoreContext_log.ldf
+/DefenceStore/App_Data/DefenceStore.DAL.DefenceStoreContext_log.ldf
+*.ldf
