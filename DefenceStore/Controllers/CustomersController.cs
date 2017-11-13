@@ -68,7 +68,7 @@ namespace DefenceStore.Controllers
             db.Customers.Add(customer);
             db.SaveChanges();
 
-            return RedirectToAction("CustLogin", "Customer");
+            return RedirectToAction("CustLogin", "Customers");
 
             return View(customer);
         }
@@ -142,7 +142,7 @@ namespace DefenceStore.Controllers
             db.Customers.Remove(customer);
             db.SaveChanges();
 
-            if (((Customer)Session["Client"]).ID == id)
+            if (((Customer)Session["Customer"]).ID == id)
             {
                 Session.Clear();
             }
