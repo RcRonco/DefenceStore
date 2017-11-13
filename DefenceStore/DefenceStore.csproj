@@ -108,19 +108,9 @@
     <Compile Include="Migrations\201711081835079_Migration08112017.Designer.cs">
       <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Migrations\201711111823231_Migration11112017.cs" />
     <Compile Include="Migrations\201711111823231_Migration11112017.Designer.cs">
       <DependentUpon>201711111823231_Migration11112017.cs</DependentUpon>
-=======
-    <Compile Include="Migrations\201711111242589_Migration11112017.cs" />
-    <Compile Include="Migrations\201711111242589_Migration11112017.Designer.cs">
-      <DependentUpon>201711111242589_Migration11112017.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711111245426_Migration111120172.cs" />
-    <Compile Include="Migrations\201711111245426_Migration111120172.Designer.cs">
-      <DependentUpon>201711111245426_Migration111120172.cs</DependentUpon>
->>>>>>> 30ccf3a415fb8c3df7ce2dbe6ee1c2e4c91c29fd
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
@@ -247,16 +237,8 @@
     <EmbeddedResource Include="Migrations\201711081835079_Migration08112017.resx">
       <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\201711111823231_Migration11112017.resx">
       <DependentUpon>201711111823231_Migration11112017.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\201711111242589_Migration11112017.resx">
-      <DependentUpon>201711111242589_Migration11112017.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111245426_Migration111120172.resx">
-      <DependentUpon>201711111245426_Migration111120172.cs</DependentUpon>
->>>>>>> 30ccf3a415fb8c3df7ce2dbe6ee1c2e4c91c29fd
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
