@@ -2,9 +2,6 @@
 
 @{
     ViewBag.Title = "Edit";
-    //Html.HiddenFor(m => m.products);
-    //Html.HiddenFor(m => m.Customer);
-    //Html.HiddenFor(m => m.TotalBill);
 }
 
 <h2>Edit</h2>
@@ -91,7 +88,7 @@
                     <th>
                         <div class="form-group">
                             <div class="col-md-10">
-                                @Html.EditorFor(modelItem => Model.products[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(modelItem => Model.products[i].Quantity, new { htmlAttributes = new { @class = "form-control", max = 20, min = 0 } })
                                 @Html.ValidationMessageFor(modelItem => Model.products[i].Quantity, "", new { @class = "text-danger" })
                             </div>
                         </div>
