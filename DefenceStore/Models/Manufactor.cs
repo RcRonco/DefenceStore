@@ -11,6 +11,7 @@ namespace DefenceStore.Models
         [Required]
         public string Name { get; set; }
         public string Desciption { get; set; }
+        public int TotalProduct { get; set; }
 
         [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }

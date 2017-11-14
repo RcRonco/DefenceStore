@@ -1,14 +1,17 @@
 ﻿@{
-    DefenceStore.Models.Customer cust = ((DefenceStore.Models.Customer)Session["Client"]);
+    DefenceStore.Models.Customer cust = ((DefenceStore.Models.Customer)Session["Customer"]);
 }
-<ul class="navbar-nav bd-navbar-nav flex-row navbar-right">
-    @if (cust == null)
-    {
-        <li class="nav-item">
-            @Html.ActionLink("Register", "Create", "Customers", new { area = "" }, new { @class = "nav-link" })
+<ul class="nav navbar-nav bd-navbar-nav flex-row navbar-right">
+        @if (cust == null)
+        {
+            <li class="nav-item">
+
+            @Html.ActionLink("Register", "Create", "Customers", new { area = "" }, new { @class = "navLink" })
+
+            
         </li>
         <li class="nav-item">
-            @Html.ActionLink("Login", "CustLogin", "Customers", new { area = "" }, new { @class = "nav-link" })
+            <li>@Html.ActionLink("Login", "CustLogin", "Customers", new { area = "" }, new { @class = "navLink" })</li>
         </li>
     }
     else
@@ -19,7 +22,7 @@
             </a>
         </li>
         <li class="nav-item" style="margin-right: 10px">
-            @Html.ActionLink("Log Out", "Logout", "Customers", new { area = "" }, new { @class = "nav-link" })
+            @Html.ActionLink("Log Out", "Logout", "Customers", new { area = "" }, new { @class = "navLink" })
         </li>
     }
 </ul>

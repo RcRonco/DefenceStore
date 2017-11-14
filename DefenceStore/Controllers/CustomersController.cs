@@ -18,10 +18,10 @@ namespace DefenceStore.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            //if (AuthorizationCheck.AdminAuthorized(Session))
-            //{
+            if (AuthorizationCheck.AdminAuthorized(Session))
+            {
                 return View(db.Customers.ToList());
-            //}
+            }
 
             return RedirectToAction("Index", "Home");
         }
@@ -68,7 +68,7 @@ namespace DefenceStore.Controllers
             db.Customers.Add(customer);
             db.SaveChanges();
 
-            //TODO : Redirect to login
+            return RedirectToAction("CustLogin", "Customers");
 
             return View(customer);
         }
@@ -142,7 +142,7 @@ namespace DefenceStore.Controllers
             db.Customers.Remove(customer);
             db.SaveChanges();
 
-            if (((Customer)Session["Client"]).ID == id)
+            if (((Customer)Session["Customer"]).ID == id)
             {
                 Session.Clear();
             }
@@ -152,12 +152,12 @@ namespace DefenceStore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "ClientName,Password")] Customer customer)
+        public ActionResult Login([Bind(Include = "Username,Password")] Customer customer)
         {
             var pass = customer.Password;
-            var logonName = customer.Username;
+            var username = customer.Username;
 
-            var requestedClient = db.Customers.SingleOrDefault(u => u.Username.Equals(logonName) && u.Password.Equals(pass));
+            var requestedClient = db.Customers.SingleOrDefault(u => u.Username.Equals(username) && u.Password.Equals(pass));
 
             if (requestedClient == null)
             {

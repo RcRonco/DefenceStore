@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@model DefenceStore.Models.Order
 
 @{
@@ -118,3 +119,128 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+=======
+﻿@model DefenceStore.Models.Order
+
+@{
+    ViewBag.Title = "Edit";
+    //Html.HiddenFor(m => m.products);
+    //Html.HiddenFor(m => m.Customer);
+    //Html.HiddenFor(m => m.TotalBill);
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Order</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerID, "CustomerID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CustomerID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BillingType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BillingType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BillingType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Desciption, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Desciption, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Desciption, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.products.FirstOrDefault().OrderID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.products.FirstOrDefault().Product.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.products.FirstOrDefault().Product.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.products.FirstOrDefault().Quantity)
+                </th>
+                <th> Total Price</th>
+                <th></th>
+            </tr>
+            @for (int i = 0; i < Model.products.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.products[i].OrderID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.products[i].Product.Name)
+                        @Html.HiddenFor(model => Model.products[i].ProductID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.products[i].Product.Price)
+                    </td>
+                    <th>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(modelItem => Model.products[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(modelItem => Model.products[i].Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        @(Model.products[i].Quantity * Model.products[i].Product.Price)
+                    </th>
+                    <td>
+                        @Html.ActionLink("Remove", "Delete", "OrderProducts", new { Model.products[i].ID }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+<h4>Total: @Html.DisplayFor(modelItem => Model.TotalBill) </h4>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+>>>>>>> 31971614a645bd17c86c438671ec25310cf1b5b0

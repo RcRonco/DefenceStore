@@ -108,13 +108,9 @@
     <Compile Include="Migrations\201711081835079_Migration08112017.Designer.cs">
       <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711111242589_Migration11112017.cs" />
-    <Compile Include="Migrations\201711111242589_Migration11112017.Designer.cs">
-      <DependentUpon>201711111242589_Migration11112017.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711111245426_Migration111120172.cs" />
-    <Compile Include="Migrations\201711111245426_Migration111120172.Designer.cs">
-      <DependentUpon>201711111245426_Migration111120172.cs</DependentUpon>
+    <Compile Include="Migrations\201711111823231_Migration11112017.cs" />
+    <Compile Include="Migrations\201711111823231_Migration11112017.Designer.cs">
+      <DependentUpon>201711111823231_Migration11112017.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
@@ -125,12 +121,19 @@
     <Compile Include="Models\ShoppingCart.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\addIcon.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\deleteIcon.png" />
+    <Content Include="Content\detailsIcon.png" />
+    <Content Include="Content\editIcon.png" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\Intro.mp4" />
+    <Content Include="Content\main.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -217,6 +220,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Orders\CreateOrder.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
+    <Content Include="Views\Customers\FailedLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -233,11 +237,8 @@
     <EmbeddedResource Include="Migrations\201711081835079_Migration08112017.resx">
       <DependentUpon>201711081835079_Migration08112017.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111242589_Migration11112017.resx">
-      <DependentUpon>201711111242589_Migration11112017.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711111245426_Migration111120172.resx">
-      <DependentUpon>201711111245426_Migration111120172.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711111823231_Migration11112017.resx">
+      <DependentUpon>201711111823231_Migration11112017.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
