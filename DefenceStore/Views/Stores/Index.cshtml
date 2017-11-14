@@ -1,0 +1,46 @@
+﻿<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyDbK3-PKcz9w3uDXkR49HxkIYy5I-2tR8k"
+        type="text/javascript"></script>
+@{
+    ViewBag.Title = "Stores";
+}
+<center>
+    <h6 style="margin: 20px 0">@ViewBag.Title</h6>
+    <address>
+        We have stores at Tzrifin, Tel Hashomer, and Shalishut
+    </address>
+    <div id="map" style="width: 500px; height: 400px;"></div>
+</center>
+<script type="text/javascript">
+    function initMap() {
+        var tzrifinStore = { lat: 31.957328, lng: 34.84056599999997 };
+        var shalishutStore = { lat: 32.0861036, lng: 34.82230930000003 };
+        var telHashomerStore = { lat: 32.0496814, lng: 34.85028680000005 };
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: tzrifinStore
+        });
+
+        var marker = new google.maps.Marker({
+            position: tzrifinStore,
+            map: map,
+            title: 'Tzrifin Store'
+        });
+
+        var marker = new google.maps.Marker({
+            position: shalishutStore,
+            map: map,
+            title: 'Shalishut Store'
+        });
+
+        var marker = new google.maps.Marker({
+            position: telHashomerStore,
+            map: map,
+            title: 'Tel Hashomer Store'
+        });
+
+        marker.setMap(map);
+    }
+
+    initMap();
+</script>
