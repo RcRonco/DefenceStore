@@ -221,6 +221,8 @@
     <Content Include="Views\Orders\CreateOrder.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
     <Content Include="Views\Customers\FailedLogin.cshtml" />
+    <Content Include="Views\Orders\UserNotFound.cshtml" />
+    <Content Include="Views\Orders\EmptyCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

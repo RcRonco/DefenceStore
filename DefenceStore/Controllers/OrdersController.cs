@@ -18,7 +18,22 @@ namespace DefenceStore.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Customer);
+            if (Session["Customer"] == null)
+            {
+                return View(new List<Order>());
+            }
+
+            Customer customer = Session["Customer"] as Customer;
+            List<Order> orders;
+            if (customer.IsAdmin)
+            {
+                orders = db.Orders.Include(o => o.Customer).ToList();
+            }
+            else
+            {
+                orders = db.Orders.Include(o => o.Customer).Where( o => o.CustomerID == customer.ID).ToList();
+            }
+            
 
             foreach (Order o in orders) {
                float res = calculateTotalBill(o);
@@ -43,17 +58,28 @@ namespace DefenceStore.Controllers
             return View(order);
         }
 
-        public ActionResult CreateOrder(int? cid)
+        public ActionResult UserNotFound()
         {
-            if (cid == null)
+            return View();
+        }
+
+        public ActionResult EmptyCart()
+        {
+            return View();
+        }
+
+        public ActionResult CreateOrder()
+        {
+            if (Session["Customer"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return Redirect("UserNotFound");
             }
+            int? cid = ((Customer)Session["Customer"]).ID;
             List<Product> products = Session["Products"] as List<Product>;
 
-            if (products == null)
+            if (products == null || products.Count < 1)
             {
-                return HttpNotFound();
+                return Redirect("EmptyCart");
             }
 
             Order order = new Order();

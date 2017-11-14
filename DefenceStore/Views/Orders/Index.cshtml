@@ -6,7 +6,7 @@
     <h2>Index</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "CreateOrder")
     </p>
     <table class="table">
         <tr>
@@ -50,10 +50,14 @@
                     @Html.ActionLink(item.TotalBill.ToString(), "Search", "OrderProducts", new { item.ID }, null)
                 </td>
                 <td>
-                    @Html.ActionLink("SearchEdit", "SearchEdit", "OrderProducts", new { id = item.ID }) |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @{
+                        if (Session["Customer"] != null || ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        {
+                            Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
+                        }
+                    }
+                    @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })
+                    @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
                 </td>
                 </tr>
         }

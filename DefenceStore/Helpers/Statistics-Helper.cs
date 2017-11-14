@@ -96,6 +96,56 @@ namespace DefenceStore.Helpers
 
             return rec_prods;
         }
+
+        protected static IEnumerable<Tuple<Product,int>> alsoBought(DefenceStoreContext db, Customer customer, Product connectedProduct)
+        {
+            var inter_query = (from ords in db.Orders
+                               join ord_p in db.OrderProducts on connectedProduct.ID equals ord_p.ProductID
+                               select new { ord_p.Product, ord_p.Quantity });
+            List<Tuple<Product, int>> alsoBought = new List<Tuple<Product, int>>();
+            foreach (var item in inter_query)
+            {
+                alsoBought.Add(new Tuple<Product, int>(item.Product, item.Quantity));
+            }
+
+            alsoBought = alsoBought.OrderByDescending(ab => ab.Item2).ToList();
+
+            return alsoBought;
+        }
+        protected static Product topProduct(DefenceStoreContext db, Customer customer)
+        {
+            // Select all products ordered with the given customer id
+            var user_products = db.OrderProducts.Where(op => op.Order.CustomerID == customer.ID);
+
+            // Count customer product consumption 
+            Dictionary<int, int> productCounter = new Dictionary<int, int>();
+            user_products.ToList().ForEach(up =>
+            {
+                if (productCounter.ContainsKey(up.ProductID))
+                    productCounter[up.ProductID] += up.Quantity;
+                else
+                {
+                    productCounter.Add(up.ProductID, up.Quantity);
+                }
+            });
+
+            // Order the dictionary by consumption rate order
+            productCounter = productCounter.OrderByDescending(pc => pc.Value).ToDictionary(x => x.Key, x => x.Value);
+        
+            return db.Products.Find(productCounter.Keys.FirstOrDefault());
+        }
+        protected static IEnumerable<Product> getRecentProducts(DefenceStoreContext db, Customer customer)
+        {
+            var orders = db.Orders.Where(o => o.CustomerID == customer.ID).ToList();
+            List<Product> recentProducts = new List<Product>();
+            var order_prods = db.OrderProducts.Where(op => op.OrderID == orders[orders.Count - 1].ID);
+            foreach (OrderProduct op in order_prods)
+            {
+                recentProducts.Add(op.Product);
+            }
+
+            return recentProducts;
+        }
     }
 
     public class GraphGenerator
