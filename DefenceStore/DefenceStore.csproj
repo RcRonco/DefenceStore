@@ -94,6 +94,7 @@
     <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="DAL\DefenceStoreContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,6 +224,7 @@
     <Content Include="Views\Customers\FailedLogin.cshtml" />
     <Content Include="Views\Orders\UserNotFound.cshtml" />
     <Content Include="Views\Orders\EmptyCart.cshtml" />
+    <Content Include="Views\Stores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
