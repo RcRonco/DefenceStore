@@ -63,8 +63,9 @@ namespace DefenceStore.Controllers
             {
                 Session.Add("Products", new List<Product>());
             }
-
-            (Session["Products"] as List<Product>).Add(prod);
+            
+            if ((Session["Products"] as List<Product>).Find(p => p.ID == prod.ID) == null)
+                (Session["Products"] as List<Product>).Add(prod);
 
             return Redirect(Request.UrlReferrer.ToString());
         }
