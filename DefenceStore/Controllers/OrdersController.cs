@@ -25,6 +25,7 @@ namespace DefenceStore.Controllers
 
             Customer customer = Session["Customer"] as Customer;
             List<Order> orders;
+
             if (customer.IsAdmin)
             {
                 orders = db.Orders.Include(o => o.Customer).ToList();
