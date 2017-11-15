@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using DefenceStore.DAL;
 using DefenceStore.Models;
-
+using System.Text;
 
 namespace DefenceStore.Helpers
 {
@@ -19,18 +19,18 @@ namespace DefenceStore.Helpers
             // Check that the customer exists
             Customer customer = db.Customers.Find(customerID);
             if (customer == null)
-                throw new IDNotFoundException("Customer", customerID);
+                return getTopSellers(db, topN);
 
             if (db.Orders.Where(o => o.CustomerID == customerID).Count() > 0)
             {
-                return getProductsSpecific(db, customer, topN);
+                return getProductsForUser(db, customer, topN);
             }
             else {
                 return getTopSellers(db, topN);
             }
         }
 
-        protected static IEnumerable<Product> getProductsSpecific(DefenceStoreContext db, Customer customer, int topN)
+        protected static IEnumerable<Product> getProductsForUser(DefenceStoreContext db, Customer customer, int topN)
         {
             Dictionary<Product, int> alsoBoughtList = new Dictionary<Product, int>();
 
@@ -78,7 +78,6 @@ namespace DefenceStore.Helpers
             // Return the most bought product that connected the the recent products of the last order
             return alsoBoughtList.Keys;
         }
-       
         protected static Dictionary<Product,int> alsoBought(DefenceStoreContext db, Customer customer, Product connectedProduct)
         {
             // Get all orders where the product is bought in.
@@ -179,9 +178,93 @@ namespace DefenceStore.Helpers
 
     public class GraphGenerator
     {
-        public static void generateTotalIncome()
+        class TimePoint
         {
+            public DateTime Date { get; set; }
+            public float TotalIncome { get; set; }
+        }
+
+        public static string generateTotalIncome(DefenceStoreContext db)
+        {
+            StringBuilder ss = new StringBuilder();
+            var orders = db.Orders;
+
+            List<TimePoint> incomes = new List<TimePoint>();
+
+            foreach (var order in orders)
+            {
+                var income_day = incomes.Find(inc => inc.Date.Date == order.Date.Date);
+                if (income_day == null)
+                {
+                    incomes.Add( new TimePoint {
+                        Date = order.Date,
+                        TotalIncome = order.TotalBill
+                    });
+                }
+                else
+                {
+                    income_day.TotalIncome += order.TotalBill;
+                }
+            }
+
+            incomes = incomes.OrderBy(inc => inc.Date).ToList();
+
+            ss.AppendLine("Date,Income");
+            foreach (TimePoint tp in incomes)
+            {
+                ss.AppendLine($"{ tp.Date.ToString("dd-MM-yy") }, { tp.TotalIncome }");
+            }
+
+            return ss.ToString();
+        }
+
+        public static string generateProductConsumption(DefenceStoreContext db)
+        {
+            StringBuilder ss = new StringBuilder();
+            ss.AppendLine("{");
+            ss.AppendLine("\t\"label\": \"Products Consumption\",");
+            var Products = db.Products;
+
+            foreach(var p in Products)
+            {
+                var order_products = db.OrderProducts.Where(op => op.ProductID == p.ID);
+                int totalConsumption = 0;
+                foreach (var op in order_products)
+                {
+                    totalConsumption += op.Quantity;
+                }
+
+                ss.AppendLine($"\t\"{ p.Name }\": { totalConsumption.ToString() },");
+            }
+            ss.Remove(ss.Length - 3, 2);
+            ss.AppendLine("}");
+
+            return ss.ToString();
+
+       }
+
+        public static string generateProductIncome(DefenceStoreContext db)
+        {
+            Dictionary<Product, float> incomes = new Dictionary<Product, float>();
+            foreach (var op in db.OrderProducts)
+            {
+                if (incomes.ContainsKey(op.Product))
+                {
+                    incomes[op.Product] += op.Quantity * op.Product.Price;
+                }
+                else
+                {
+                    incomes.Add(op.Product, op.Quantity * op.Product.Price);
+                }
+            }
+            StringBuilder ss = new StringBuilder();
+            ss.AppendLine("Name,Income");
+            foreach(var inc in incomes)
+            {
+                ss.AppendLine($"{ inc.Key.Name },{ inc.Value.ToString() }");
+            }
             
+            return ss.ToString();
         }
     }
 }

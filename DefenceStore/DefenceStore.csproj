@@ -119,6 +119,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addIcon.png" />
@@ -158,6 +160,7 @@
     <Content Include="Scripts\d3\LICENSE" />
     <Content Include="Scripts\d3\CHANGES.md" />
     <Content Include="Scripts\d3\API.md" />
+    <Content Include="Content\test-json.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -223,6 +226,11 @@
     <Content Include="Views\Customers\FailedLogin.cshtml" />
     <Content Include="Views\Orders\UserNotFound.cshtml" />
     <Content Include="Views\Orders\EmptyCart.cshtml" />
+    <Content Include="Views\Customers\Recommended.cshtml" />
+    <Content Include="Views\Statistics\Income.cshtml" />
+    <Content Include="Views\Statistics\Consumption.cshtml" />
+    <Content Include="Views\Statistics\ProductsIncome.cshtml" />
+    <Content Include="Views\Statistics\Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
