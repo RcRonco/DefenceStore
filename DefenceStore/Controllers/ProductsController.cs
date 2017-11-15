@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DefenceStore.DAL;
 using DefenceStore.Models;
+using DefenceStore.Handlers;
 
 namespace DefenceStore.Controllers
 {
@@ -152,6 +153,17 @@ namespace DefenceStore.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void ShareProduct(int? id)
+        {
+            if (id == null)
+             {
+                throw new HttpException(400, "400 Bad Request");
+            }
+
+            Product product = db.Products.Find(id);
+            FacebookHandler.PostMessage(product);
         }
     }
 }
