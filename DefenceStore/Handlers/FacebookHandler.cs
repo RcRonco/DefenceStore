@@ -19,7 +19,7 @@ namespace DefenceStore.Handlers
         private const string FacebookApiID = "127515004591775";
         private const string FacebookApiSecret = "837b99f237fd3fd17e99fec9161a8985";
         private const string PageID = "358735974554546";
-        private const string fb_exchange_token = "EAABzZBWaNXp8BAAREeW9y4fW7JKWxUoqf8FRE7IQBNpkpZCN32GiToYkdirGCX887lglZCpKXLSNBvqrhPrzWz6Xopt83cZB6TMiT3hEHWhWOZCOF82N84Wa1igxBn3fW98yBokx9DLJvZBhb18K5h2U1sRGepSNGheGSab6zc8nZA7LMQY3m91";
+        private const string fb_exchange_token = "EAABzZBWaNXp8BALOIiAwBN1VfB9mBLNUiw0qfsEwZBqDCUEZALCnDnstXmF4Db9AVhP5f8NMOtNYKDDNQV7QV7S5U5oqZCiMnCRdAnY50PJSQZBb6a5Ocut6Jt9GPviXW4a8fP0nDMunftU891I03MDjZBQC9CeZA8s0KXpkIFGON62OhJwuB5u";
         //private const string fb_exchange_token = "EAABzZBWaNXp8BAPKSdP5AxZCZAwL4bzIpDp9HRfAHqmHmWt7zOgd75bd7EF6avGO7ArNIZBpOI26UzR9DBVbwV9LpBGk6yhr4kQ9Q6ryLdnSKRQ9ZAxjr4QU2bn5QLsZBCeRVwfeCRt2ktrZATFtHrfPqYnHuABs41ZAmyshUVvNCgE0QnwhULVvMaScoroZBtsgZD";
 
         private const string AuthenticationUrlFormat =
@@ -69,13 +69,13 @@ namespace DefenceStore.Handlers
 
                 dynamic messagePost = new ExpandoObject();
                 messagePost.access_token = accessToken;
-                messagePost.message = "Check Out The New Product In Our Store:" + product.Name +
-                                      " ( " + product.QuantityInStock + " left in stock) " + "/n Now Only In: " + product.Price + "₪";
-                if (product.Image != null)
-                {
-                    messagePost.picture = product.Image;
-                    messagePost.link = "https://www.facebook.com/DefenceStore-358735974554546/";
-                }
+                messagePost.message = "Check Out The New Product In Our Store: " + product.Name +
+                                      " ( " + product.QuantityInStock + " left in stock) " + "\n Now Only In: " + product.Price + "₪";
+                //if (product.Image != null)
+                //{
+                //    messagePost.picture = product.Image;
+                //    messagePost.link = "localhost";
+                //}
                 //messagePost.name = "[SOME_NAME]";
                 //messagePost.caption = "my caption"; 
                 //messagePost.description = "my description";
@@ -85,11 +85,11 @@ namespace DefenceStore.Handlers
             }
             catch (FacebookOAuthException ex)
             {
-                throw new HttpException(401, "401 UNAUTHORIZED");
+                throw new HttpException(401, ex.Message);
             }
             catch (Exception ex)
             {
-                throw new HttpException(400, "400 Bad Request");
+                throw new HttpException(400, ex.Message);
 
             }
 

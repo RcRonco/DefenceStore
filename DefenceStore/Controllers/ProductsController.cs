@@ -156,7 +156,7 @@ namespace DefenceStore.Controllers
             base.Dispose(disposing);
         }
 
-        public void ShareProduct(int? id)
+        public ActionResult ShareProduct(int? id)
         {
             if (id == null)
              {
@@ -165,6 +165,8 @@ namespace DefenceStore.Controllers
 
             Product product = db.Products.Find(id);
             FacebookHandler.PostMessage(product);
+
+            return RedirectToAction("Index");
         }
     }
 }
