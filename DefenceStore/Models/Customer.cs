@@ -15,8 +15,8 @@ namespace DefenceStore.Models
         [Required, StringLength(30)]
         public string LastName { get; set; }
 
-        [Required]
-        public string Gender { get; set; }
+
+        public Gender Gender { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
