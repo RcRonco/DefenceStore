@@ -233,6 +233,7 @@
     <Content Include="Views\Statistics\ProductsIncome.cshtml" />
     <Content Include="Views\Statistics\Data.cshtml" />
     <Content Include="Views\Stores\Index.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
