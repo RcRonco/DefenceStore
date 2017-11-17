@@ -1,0 +1,36 @@
+﻿    @{
+        ViewBag.Title = "Graphs";
+    }
+
+
+    <h2>Graphs</h2>
+
+    <section id="popular-clients-graph">
+        <h4>Preferred billing types</h4>
+    </section>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="~/Scripts/graph.js"></script>
+    <div id="billing-types-graph"></div>
+    <script>
+        $.ajax({
+            url: '/Orders/GetBillingTypesCount',
+            success: function (data) {
+                BillingTypesGraph(data);
+            }
+        })
+    </script>
+
+    <hr />
+    <section id="popular-gender-graph">
+        <h4>Sales by dates</h4>
+    </section>
+    <div id="orders-by-dates-graph"></div>
+    <script>
+        $.ajax({
+            url: '/Orders/GetOrdersByDates',
+            success: function (data) {
+                OrdersByDatesGraph(data);
+            }
+        })
+    </script>
+

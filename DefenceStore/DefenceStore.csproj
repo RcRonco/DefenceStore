@@ -119,6 +119,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="ViewModels\OrdersBillingTypesViewModel.cs" />
+    <Compile Include="ViewModels\OrdersByDateTypesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addIcon.png" />
@@ -131,9 +133,11 @@
     <Content Include="Content\deleteIcon.png" />
     <Content Include="Content\detailsIcon.png" />
     <Content Include="Content\editIcon.png" />
+    <Content Include="Content\intersection.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\Intro.mp4" />
     <Content Include="Content\main.jpg" />
+    <Content Include="Content\topography.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -158,6 +162,7 @@
     <Content Include="Scripts\d3\LICENSE" />
     <Content Include="Scripts\d3\CHANGES.md" />
     <Content Include="Scripts\d3\API.md" />
+    <Content Include="Content\Roboto-Light.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -175,6 +180,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -221,6 +227,8 @@
     <Content Include="Views\Orders\CreateOrder.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
     <Content Include="Views\Customers\FailedLogin.cshtml" />
+    <Content Include="Views\Manufactors\Statistics.cshtml" />
+    <Content Include="Views\Orders\Graphs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

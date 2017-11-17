@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using DefenceStore.DAL;
 using DefenceStore.Models;
+using DefenceStore.ViewModels;
+using System.Collections;
 
 namespace DefenceStore.Controllers
 {
@@ -251,6 +253,11 @@ namespace DefenceStore.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult Graphs(int? id)
+        {
+            return View("Graphs");
+        }
+
         protected float calculateTotalBill(Order order)
         {
             var orders = db.Orders.Include(o => o.Customer);
@@ -277,6 +284,44 @@ namespace DefenceStore.Controllers
              });
 
              return order.TotalBill;
+        }
+
+        public ActionResult GetBillingTypesCount()
+        {
+            var queryResult =
+                from order in db.Orders
+                select new 
+                {
+                    BillingType = order.BillingType
+                };
+
+            var final = from order in queryResult
+                        group order by order into g
+                        let count = g.Count()
+                        select new OrdersBillingTypesViewModel { BillingType = g.Key.BillingType, NumberOfOrders = count };
+
+            var data = Json(final, JsonRequestBehavior.AllowGet);
+
+            return data;
+        }
+
+        public ActionResult GetOrdersByDates()
+        {
+            var queryResult =
+                from order in db.Orders
+                select new
+                {
+                    OrderDate = ((DateTime)order.Date).ToString()
+                };
+
+            var final = from order in queryResult
+                        group order by order into g
+                        let count = g.Count()
+                        select new OrdersByDateTypesViewModel { OrderDate = g.Key.OrderDate, NumberOfOrders = count };
+
+            var data = Json(final, JsonRequestBehavior.AllowGet);
+
+            return data;
         }
     }
 }

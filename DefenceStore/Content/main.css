@@ -1,6 +1,13 @@
 ﻿body {
+    background-color: #DFDBE5;
+    background-image: url("./topography.png");
+    font-family: bob !important;
+    font-size: 16px !important;
 }
-
+@font-face {
+    font-family: bob;
+    src: url("./Roboto-Light.ttf");
+}
 th {
     background: #39434a;
     color: white;
@@ -62,13 +69,13 @@ a.details {
 }
 
 .customNavbar {
-    background-color: #43A047 !important;
+    background-color: #3490e0 !important;
     transition: background-color 0.5s ease;
     padding-right: 15px;
     color: white;
 }
 nav:hover {
-    background-color: dodgerblue !important;
+    background-color: lightseagreen !important;
 }
 canvas {
     border-radius: 4px;
@@ -88,3 +95,36 @@ h2 {
     -webkit-column-count: 3;
     -webkit-column-gap: 20px;
 }
+
+.bar {
+    fill: dodgerblue;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+body {
+    font: 12px Arial;
+}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
