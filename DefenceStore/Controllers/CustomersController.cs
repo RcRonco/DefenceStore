@@ -196,6 +196,19 @@ namespace DefenceStore.Controllers
             return View();
         }
 
+        public ActionResult Search(string username)
+        {
+            var customer = (from m in db.Customers
+                            select m).ToList();
+
+            if (!String.IsNullOrEmpty(username))
+            {
+                customer = customer.Where(m => m.Username.Contains(username)).ToList();
+            }
+
+            return View(customer);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

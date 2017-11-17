@@ -265,6 +265,7 @@
     <Content Include="Views\Manufactors\Statistics.cshtml" />
     <Content Include="Views\Orders\Graphs.cshtml" />
     <Content Include="Views\Products\Search.cshtml" />
+    <Content Include="Views\Customers\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
