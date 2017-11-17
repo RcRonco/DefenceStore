@@ -69,8 +69,7 @@ namespace DefenceStore.Handlers
 
                 dynamic messagePost = new ExpandoObject();
                 messagePost.access_token = accessToken;
-                messagePost.message = "Check Out The New Product In Our Store: " + product.Name +
-                                      " ( " + product.QuantityInStock + " left in stock) " + "\n Now Only In: " + product.Price + "₪";
+                messagePost.message = "Check Out The New Product In Our Store: " + product.Name +"\n\n Now Only In: " + product.Price + "₪";
                 //if (product.Image != null)
                 //{
                 //    messagePost.picture = product.Image;
