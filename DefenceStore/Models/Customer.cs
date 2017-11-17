@@ -20,7 +20,7 @@ namespace DefenceStore.Models
 
         [Required]
         [DataType(DataType.Date)]
-		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
 
         [Required]
@@ -40,5 +40,9 @@ namespace DefenceStore.Models
 
         [DisplayName("Administrator")]
         public bool IsAdmin { get; set; }
+
+        public float Latitude { get; set; }
+
+        public float Longitude { get; set; }
     }
 }

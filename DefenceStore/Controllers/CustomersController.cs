@@ -67,7 +67,7 @@ namespace DefenceStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,IsAdmin")] Customer customer)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,Latitude,Longitude,IsAdmin")] Customer customer)
         {
             if (!ModelState.IsValid) return View(customer);
 
@@ -108,7 +108,7 @@ namespace DefenceStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,IsAdmin")] Customer customer)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,Latitude,Longitude,IsAdmin")] Customer customer)
         {
             if(!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 

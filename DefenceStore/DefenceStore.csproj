@@ -127,6 +127,10 @@
     <Compile Include="Migrations\201711160817280_AddGender.Designer.cs">
       <DependentUpon>201711160817280_AddGender.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711172158521_AddCoordinates.cs" />
+    <Compile Include="Migrations\201711172158521_AddCoordinates.Designer.cs">
+      <DependentUpon>201711172158521_AddCoordinates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Product.cs" />
@@ -288,6 +292,9 @@
     <EmbeddedResource Include="Migrations\201711160817280_AddGender.resx">
       <DependentUpon>201711160817280_AddGender.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711172158521_AddCoordinates.resx">
+      <DependentUpon>201711172158521_AddCoordinates.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -314,7 +321,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50676/</IISUrl>
+          <IISUrl>http://localhost:50677/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

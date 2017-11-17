@@ -9,6 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 
+
     @using (Html.BeginForm("Search", "Customers", FormMethod.Get))
     {
     <p>
@@ -44,46 +45,70 @@
             <th>
                 @Html.DisplayNameFor(model => model.Password)
             </th>
+            <td>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </td>
             <th>
                 @Html.DisplayNameFor(model => model.IsAdmin)
             </th>
             <th></th>
         </tr>
 
-        @foreach (var item in Model)
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Birthday)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAdmin)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "details" })
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Birthday)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Username)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsAdmin)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "details" })
+                    No Results Found!
                 </td>
             </tr>
         }

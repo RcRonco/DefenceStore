@@ -11,6 +11,7 @@ namespace DefenceStore.Controllers
         // GET: Stores
         public ActionResult Index()
         {
+
             return View();
         }
     }
