@@ -206,6 +206,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -214,6 +215,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\weather.js" />
     <Content Include="SQL Selects\JOIN-Orders-OrderProducts-Products.sql" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />

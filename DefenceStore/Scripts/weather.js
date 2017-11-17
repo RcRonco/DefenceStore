@@ -7,12 +7,12 @@ var weatherCallback = function (data) {
     $("#temperatureDiv p").html(text);
 
     if (item.condition.temp <= 20) {
-        updateTemperatureDiv("Its pretty cold toady, maybe you would like to order some warm clothes?");
+        updateTemperatureDiv("The cold doesn't bother, we are the IDF!");
     }
     else if (item.condition.temp > 16 && item.condition.temp < 30) {
-        updateTemperatureDiv("The weather is great! but you are still a soldier so that sucks.");
+        updateTemperatureDiv("The weather is amazing! now get back to work!");
     } else {
-        updateTemperatureDiv("Sweating will only mkae your stronger!");
+        updateTemperatureDiv("Sweating will only make your stronger!");
     }
 };
 
