@@ -26,6 +26,16 @@ namespace DefenceStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Recommended()
+        {
+            if (Session["Customer"] == null)
+            {
+                return PartialView(Helpers.Recommender.getProducts(db, -1));
+            }
+
+            return PartialView(Helpers.Recommender.getProducts(db, (Session["Customer"] as Customer).ID));
+        }
+
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {

@@ -52,6 +52,15 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -94,11 +103,13 @@
     <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StoresController.cs" />
     <Compile Include="DAL\DefenceStoreContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Handlers\FacebookHandler.cs" />
     <Compile Include="Helpers\Statistics-Helper.cs" />
     <Compile Include="Migrations\201711052037353_InitialCreate.cs" />
     <Compile Include="Migrations\201711052037353_InitialCreate.Designer.cs">
@@ -112,15 +123,20 @@
     <Compile Include="Migrations\201711111823231_Migration11112017.Designer.cs">
       <DependentUpon>201711111823231_Migration11112017.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711160817280_AddGender.cs" />
+    <Compile Include="Migrations\201711160817280_AddGender.Designer.cs">
+      <DependentUpon>201711160817280_AddGender.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Manufactor.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
-    <Compile Include="ViewModels\OrdersBillingTypesViewModel.cs" />
-    <Compile Include="ViewModels\OrdersByDateTypesViewModel.cs" />
+    <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\addIcon.png" />
@@ -128,18 +144,19 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\deleteIcon.png" />
     <Content Include="Content\detailsIcon.png" />
     <Content Include="Content\editIcon.png" />
-    <Content Include="Content\intersection.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\Intro.mp4" />
     <Content Include="Content\main.jpg" />
-    <Content Include="Content\topography.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\d3\d3.js" />
@@ -162,7 +179,15 @@
     <Content Include="Scripts\d3\LICENSE" />
     <Content Include="Scripts\d3\CHANGES.md" />
     <Content Include="Scripts\d3\API.md" />
-    <Content Include="Content\Roboto-Light.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\test-json.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -180,7 +205,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -227,8 +251,14 @@
     <Content Include="Views\Orders\CreateOrder.cshtml" />
     <Content Include="Views\OrderProducts\Search.cshtml" />
     <Content Include="Views\Customers\FailedLogin.cshtml" />
-    <Content Include="Views\Manufactors\Statistics.cshtml" />
-    <Content Include="Views\Orders\Graphs.cshtml" />
+    <Content Include="Views\Orders\UserNotFound.cshtml" />
+    <Content Include="Views\Orders\EmptyCart.cshtml" />
+    <Content Include="Views\Customers\Recommended.cshtml" />
+    <Content Include="Views\Statistics\Income.cshtml" />
+    <Content Include="Views\Statistics\Consumption.cshtml" />
+    <Content Include="Views\Statistics\ProductsIncome.cshtml" />
+    <Content Include="Views\Statistics\Data.cshtml" />
+    <Content Include="Views\Stores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -247,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711111823231_Migration11112017.resx">
       <DependentUpon>201711111823231_Migration11112017.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711160817280_AddGender.resx">
+      <DependentUpon>201711160817280_AddGender.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
