@@ -9,6 +9,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Search", "Products", FormMethod.Get))
+{
+    <p>
+        Name: @Html.TextBox("name")
+        Description @Html.TextBox("description")
+        Price: <input type="number" min="0" step="1" name="price" id="price" />
+        <input type="submit" value="Filter" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -28,32 +39,42 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manufactor.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desciption)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>    
-            @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })
-            @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
-            @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" })
-            @Html.ActionLink(".", "Details", new { id=item.ID }, new { @class = "details" })
-            @Html.ActionLink("Share Product", "ShareProduct", new { id = item.ID });
-        </td>
-    </tr>
-}
-
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufactor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desciption)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>    
+                    @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })
+                    @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
+                    @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" })
+                    @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })
+                    @Html.ActionLink("Share Product", "ShareProduct", new { id = item.ID });
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                No Results Found!
+            </td>
+        </tr>
+    }
 </table>

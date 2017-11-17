@@ -38,6 +38,30 @@ namespace DefenceStore.Controllers
             return View(product);
         }
 
+        // GET: Products/Search/
+        public ActionResult Search(string name, string description, float? price)
+        {
+            var products = (from m in db.Products
+                               select m).ToList();
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                products = products.Where(m => m.Name.Contains(name)).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(description))
+            {
+                products = products.Where(m => m.Desciption.Contains(description)).ToList();
+            }
+
+            if (price >= 0)
+            {
+                products = products.Where(m => m.Price.Equals(price)).ToList();
+            }
+
+            return View(products);
+        }
+
         // GET: Products/Create
         public ActionResult Create()
         {
