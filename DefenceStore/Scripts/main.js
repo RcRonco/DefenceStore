@@ -44,7 +44,7 @@
         .attr("dy", ".71em")
         .attr("transform", "rotate(-90)")
         .style("text-anchor", "end")
-        .text("NumberOfComment");
+        .text("Number Of Orders");
 
     svg.selectAll("bar")
         .data(data)
