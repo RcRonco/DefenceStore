@@ -7,7 +7,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @{
+        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+        {
+            @Html.ActionLink("Create New", "Create");
+        }
+    }
 </p>
 
 @using (Html.BeginForm("Search", "Products", FormMethod.Get))
@@ -60,9 +65,20 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>    
-                    @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })
-                    @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
-                    @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" })
+                    @{
+                        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        {
+                            @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
+                        }
+                    }
+                    @{
+                        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        {
+                            @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" });
+
+                        }
+                    }
+                    @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })                   
                     @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })
                     @Html.ActionLink(".", "ShareProduct", new { id = item.ID }, new { @class = "share" })
                 </td>
