@@ -156,6 +156,7 @@
     <Content Include="Content\deleteIcon.png" />
     <Content Include="Content\detailsIcon.png" />
     <Content Include="Content\editIcon.png" />
+    <Content Include="Content\shareIcon.png" />
     <Content Include="Content\intersection.png" />
     <Content Include="Content\main.css" />
     <Content Include="Content\Intro.mp4" />
