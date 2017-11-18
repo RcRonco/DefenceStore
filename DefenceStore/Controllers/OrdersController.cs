@@ -366,5 +366,18 @@ namespace DefenceStore.Controllers
 
             return "There are a total of " + total + " orders, " + male + " of them made by males and " + female + " made by females";
         }
+
+        public ActionResult Search(string name)
+        {
+            var order = (from m in db.Orders
+                            select m).ToList();
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                order = order.Where(m => m.Customer.FirstName.Contains(name) || m.Customer.LastName.Contains(name)).ToList();
+            }
+
+            return View(order);
+        }
     }
 }

@@ -8,6 +8,18 @@
     <p>
         @Html.ActionLink("Create New", "CreateOrder")
     </p>
+
+
+@using (Html.BeginForm("Search", "Orders", FormMethod.Get))
+{
+    <p>
+        Name: @Html.TextBox("name")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+
+
     <table class="table">
         <tr>
             <th> Name </th>
