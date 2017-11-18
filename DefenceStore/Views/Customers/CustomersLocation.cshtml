@@ -1,0 +1,36 @@
+﻿<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyDbK3-PKcz9w3uDXkR49HxkIYy5I-2tR8k"
+        type="text/javascript"></script>
+@{
+    ViewBag.Title = "CustomersLocation";
+}
+<center>
+    <h6 style="margin: 20px 0">@ViewBag.Title</h6>
+    <address>
+        Here are our customers!
+    </address>
+    <div id="map" style="width: 500px; height: 400px;"></div>
+</center>
+<script type="text/javascript">
+    function initMap() {
+        var markers = @Html.Raw(ViewBag.Markers);
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: new google.maps.LatLng(markers[0].lat, markers[0].lng)
+        });
+
+        for (i = 0; i < markers.length; i++) {
+            var data = markers[i]
+            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: data.title
+            });
+        }
+
+        marker.setMap(map);
+    }
+
+    initMap();
+</script>
