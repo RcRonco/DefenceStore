@@ -13,7 +13,9 @@ th {
     color: white;
 }
 td {
-    min-width: 110px;
+    min-width: 132px;
+    max-width: 450px;
+    word-wrap: break-word;
 }
 a.edit {
     background: url(./editIcon.png) no-repeat top left;
@@ -39,6 +41,16 @@ a.delete {
     color: rgba(0,0,0,0);
     display: inline-flex
 }
+
+a.share {
+    background: url(./shareIcon.png) no-repeat top left;
+    width: 20px;
+    height: 20px;
+    text-indent: -9999px; /* hides the link text */
+    color: rgba(0,0,0,0);
+    display: inline-flex
+} 
+
 a.details {
     background: url(./detailsIcon.png) no-repeat top left;
     width: 20px;
@@ -127,4 +139,3 @@ path {
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
-
