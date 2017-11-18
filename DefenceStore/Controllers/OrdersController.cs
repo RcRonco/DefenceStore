@@ -34,13 +34,14 @@ namespace DefenceStore.Controllers
             }
             else
             {
-                orders = db.Orders.Include(o => o.Customer).Where( o => o.CustomerID == customer.ID).ToList();
+                orders = db.Orders.Include(o => o.Customer).Where(o => o.CustomerID == customer.ID).ToList();
             }
-            
 
-            foreach (Order o in orders) {
-               float res = calculateTotalBill(o);
-            }        
+
+            foreach (Order o in orders)
+            {
+                float res = calculateTotalBill(o);
+            }
 
             db.SaveChanges();
             return View(orders.ToList());
@@ -90,7 +91,7 @@ namespace DefenceStore.Controllers
             order.Customer = db.Customers.Find(cid);
 
             var UserOrders = db.Orders.Where(o => o.CustomerID == cid.Value).ToList<Order>();
-            
+
 
             order.Date = DateTime.Now;
             order.BillingType = UserOrders[UserOrders.Count - 1].BillingType;
@@ -138,7 +139,7 @@ namespace DefenceStore.Controllers
                     db.Orders.Add(order);
                     db.SaveChanges();
                 }
-                
+
 
                 for (int i = 0; i < op.Count; i++)
                 {
@@ -153,7 +154,7 @@ namespace DefenceStore.Controllers
                 Session.Remove("Products");
                 return RedirectToAction("Index");
             }
-            
+
             ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
             return View(order);
         }
@@ -212,7 +213,7 @@ namespace DefenceStore.Controllers
                 if (op.Quantity < 1 || p.Price < 1 /*|| op.Quantity > p.QuantityInStock*/)
                     return false;
             }
-            
+
             return true;
         }
 
@@ -223,7 +224,8 @@ namespace DefenceStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Order order)
         {
-            if (isValid(order)) {
+            if (isValid(order))
+            {
                 order.Customer = db.Customers.Find(order.CustomerID);
 
                 var ops = db.OrderProducts.Where(op => order.ID == op.OrderID);
@@ -296,28 +298,29 @@ namespace DefenceStore.Controllers
 	                JOIN dbo.OrderProducts ON dbo.Orders.ID = dbo.OrderProducts.OrderID 
 	                JOIN dbo.Products ON dbo.OrderProducts.ProductID = dbo.Products.ID 
              */
-             
-             var q = (from ords in orders
-                      join ord_p in order_prd on ords.ID equals ord_p.OrderID
-                      join prd in db.Products on ord_p.ProductID equals prd.ID
-                      select new { ords.ID, prd.Price, OPID = ord_p.ID });
 
-             order.TotalBill = 0;
-             var q_list = q.Where(q_i => q_i.ID == order.ID).ToList();
-             q_list.ForEach(q_i => {
+            var q = (from ords in orders
+                     join ord_p in order_prd on ords.ID equals ord_p.OrderID
+                     join prd in db.Products on ord_p.ProductID equals prd.ID
+                     select new { ords.ID, prd.Price, OPID = ord_p.ID });
+
+            order.TotalBill = 0;
+            var q_list = q.Where(q_i => q_i.ID == order.ID).ToList();
+            q_list.ForEach(q_i =>
+            {
                 var x = order_prd.Where(op => op.ID == q_i.OPID).ToList();
                 var quant = order_prd.Where(op => op.ID == q_i.OPID).First().Quantity;
                 order.TotalBill += q_i.Price * quant;
-             });
+            });
 
-             return order.TotalBill;
+            return order.TotalBill;
         }
 
         public ActionResult GetBillingTypesCount()
         {
             var queryResult =
                 from order in db.Orders
-                select new 
+                select new
                 {
                     BillingType = order.BillingType
                 };
@@ -349,6 +352,19 @@ namespace DefenceStore.Controllers
             var data = Json(final, JsonRequestBehavior.AllowGet);
 
             return data;
+        }
+
+        public string OrdersByGender()
+        {
+            var genderQuery =
+                from order in db.Orders
+                join customer in db.Customers on order.CustomerID equals customer.ID 
+                select new { customerGender = customer.Gender };
+            int total = genderQuery.ToList().Count;
+            int male = genderQuery.Count(x => x.customerGender.ToString() == "Male");
+            int female = total - male;
+
+            return "There are a total of " + total + " orders, " + male + " of them made by males and " + female + " made by females";
         }
     }
 }

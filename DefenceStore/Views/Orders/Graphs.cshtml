@@ -6,11 +6,12 @@
     <h2>Graphs</h2>
 
     <section id="popular-clients-graph">
-        <h4>Preferred billing types</h4>
-    </section>
+    <h4>Preferred billing types</h4>
+
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="~/Scripts/graph.js"></script>
     <div id="billing-types-graph"></div>
+</section>
     <script>
         $.ajax({
             url: '/Orders/GetBillingTypesCount',
@@ -22,15 +23,31 @@
 
     <hr />
     <section id="popular-gender-graph">
-        <h4>Sales by dates</h4>
-    </section>
-    <div id="orders-by-dates-graph"></div>
-    <script>
-        $.ajax({
-            url: '/Orders/GetOrdersByDates',
-            success: function (data) {
-                OrdersByDatesGraph(data);
-            }
-        })
-    </script>
+    <h4>Sales by dates</h4>
 
+    <div id="orders-by-dates-graph"></div>
+</section>
+<script>
+     $.ajax({
+         url: '/Orders/GetOrdersByDates',
+         success: function (data) {
+             OrdersByDatesGraph(data);
+         },
+         error: function (txt, status, error) {
+             console.log("received error: " + error +  ", status: " + status);
+         }
+     })
+</script>
+<aside>
+    <h4>Interesting fact</h4>
+    <div id="fact"></div>
+</aside>
+   
+<script>
+     $.ajax({
+         url: '/Orders/OrdersByGender',
+         success: function (data) {
+             $("#fact").append(data);
+         }
+     })
+</script>
