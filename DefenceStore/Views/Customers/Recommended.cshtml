@@ -40,8 +40,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })
-                @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })
+                @Html.ActionLink(".", "Add", "Products", new { id = item.ID }, new { @class = "add" })
+                @Html.ActionLink(".", "Details", "Products", new { id = item.ID }, new { @class = "details" })
             </td>
         </tr>
     }
