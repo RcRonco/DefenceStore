@@ -67,7 +67,7 @@ namespace DefenceStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,IsAdmin")] Customer customer)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,Latitude,Longitude,IsAdmin")] Customer customer)
         {
             if (!ModelState.IsValid) return View(customer);
 
@@ -108,7 +108,7 @@ namespace DefenceStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,IsAdmin")] Customer customer)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Gender,Birthday,Email,Phone,Username,Password,Latitude,Longitude,IsAdmin")] Customer customer)
         {
             if(!AuthorizationCheck.AdminAuthorized(Session)) return RedirectToAction("Index", "Home");
 
@@ -193,6 +193,46 @@ namespace DefenceStore.Controllers
 
         public ActionResult CustLogin()
         {
+            return View();
+        }
+
+        public ActionResult Search(string username)
+        {
+            var customer = (from m in db.Customers
+                            select m).ToList();
+
+            if (!String.IsNullOrEmpty(username))
+            {
+                customer = customer.Where(m => m.Username.Contains(username)).ToList();
+            }
+
+            return View(customer);
+        }
+
+        public ActionResult CustomersLocation()
+        {
+            string markers = "[";
+
+            IEnumerable<Customer> queryResult =
+                from cust in db.Customers
+                where cust.Latitude != 0 && cust.Longitude != 0
+                select cust;
+
+            string fullname = "";
+
+            foreach (var customer in queryResult)
+            {
+                markers += "{";
+                fullname = customer.FirstName + " " + customer.LastName;
+                markers += string.Format("'title': '{0}',",fullname);
+                markers += string.Format("'lat': '{0}',", customer.Latitude);
+                markers += string.Format("'lng': '{0}',", customer.Longitude);
+                markers += string.Format("'description': '{0}',", customer.Username);
+                markers += "},"; 
+            }
+
+            markers += "]";
+            ViewBag.Markers = markers;
             return View();
         }
 

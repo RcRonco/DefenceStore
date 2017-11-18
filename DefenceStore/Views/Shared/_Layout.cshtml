@@ -10,8 +10,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
     <link href="~/Content/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -26,7 +28,8 @@
                     <li class="nav-item">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navLink" })</li>
                     <li class="nav-item">@Html.ActionLink("Orders", "Index", "Orders", new { area = "" }, new { @class = "navLink" })</li>
                     <li class="nav-item">@Html.ActionLink("Manufactors", "Index", "Manufactors", new { area = "" }, new { @class = "navLink" })</li>
-                    <li class="nav-item">@Html.ActionLink("Stores", "Index", "Stores", new { area = "" }, new { @class = "navLink" })</li>
+                    <li class="nav-item">@Html.ActionLink("Orders Statistics", "Graphs", "Orders", new { area = "" }, new { @class = "navLink" })</li>
+                    <li class="nav-item">@Html.ActionLink("Customers Location", "CustomersLocation", "Customers", new { area = "" }, new { @class = "navLink" })</li>
 
                     @if (cust != null && cust.IsAdmin)
                     {
@@ -44,8 +47,8 @@
         <center>
             <div id="temperatureDiv">
                 <br /><hr />
-                <h4>Weather in Rishon Lezion</h4>
-                <p>getting info...</p>
+                <h4>How's the weather?</h4>
+                <p>getting the weather info</p>
             </div>
         </center>
         <!-- Weather webservice -->
@@ -54,10 +57,11 @@
         <hr />
         <footer>
             <center>
-                <p>&copy; @DateTime.Now.Year - EST - IDF </p>
+                <p>&copy; @DateTime.Now.Year IDF ALL RIGHTS RESERVED </p>
             </center>
         </footer>
     </div>
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

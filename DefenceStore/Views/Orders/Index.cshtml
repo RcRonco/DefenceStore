@@ -8,6 +8,18 @@
     <p>
         @Html.ActionLink("Create New", "CreateOrder")
     </p>
+
+
+@using (Html.BeginForm("Search", "Orders", FormMethod.Get))
+{
+    <p>
+        Name: @Html.TextBox("name")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+
+
     <table class="table">
         <tr>
             <th> Name </th>
@@ -51,9 +63,9 @@
                 </td>
                 <td>
                     @{
-                        if (Session["Customer"] != null || ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
                         {
-                            Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
+                            @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
                         }
                     }
                     @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })

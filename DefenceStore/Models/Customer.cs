@@ -15,12 +15,12 @@ namespace DefenceStore.Models
         [Required, StringLength(30)]
         public string LastName { get; set; }
 
-        [Required]
-        public string Gender { get; set; }
+
+        public Gender Gender { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
 
         [Required]
@@ -40,5 +40,9 @@ namespace DefenceStore.Models
 
         [DisplayName("Administrator")]
         public bool IsAdmin { get; set; }
+
+        public float Latitude { get; set; }
+
+        public float Longitude { get; set; }
     }
 }

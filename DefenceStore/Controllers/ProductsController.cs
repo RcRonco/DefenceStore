@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DefenceStore.DAL;
 using DefenceStore.Models;
+using DefenceStore.Handlers;
 
 namespace DefenceStore.Controllers
 {
@@ -35,6 +36,30 @@ namespace DefenceStore.Controllers
                 return HttpNotFound();
             }
             return View(product);
+        }
+
+        // GET: Products/Search/
+        public ActionResult Search(string name, string description, float? price)
+        {
+            var products = (from m in db.Products
+                               select m).ToList();
+
+            if (!String.IsNullOrEmpty(name))
+            {
+                products = products.Where(m => m.Name.Contains(name)).ToList();
+            }
+
+            if (!String.IsNullOrEmpty(description))
+            {
+                products = products.Where(m => m.Desciption.Contains(description)).ToList();
+            }
+
+            if (price >= 0)
+            {
+                products = products.Where(m => m.Price.Equals(price)).ToList();
+            }
+
+            return View(products);
         }
 
         // GET: Products/Create
@@ -153,6 +178,19 @@ namespace DefenceStore.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ShareProduct(int? id)
+        {
+            if (id == null)
+             {
+                throw new HttpException(400, "400 Bad Request");
+            }
+
+            Product product = db.Products.Find(id);
+            FacebookHandler.PostMessage(product);
+
+            return RedirectToAction("Index");
         }
     }
 }
