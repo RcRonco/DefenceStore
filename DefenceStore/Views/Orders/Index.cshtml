@@ -51,9 +51,9 @@
                 </td>
                 <td>
                     @{
-                        if (Session["Customer"] != null || ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
                         {
-                            Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
+                            @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
                         }
                     }
                     @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })

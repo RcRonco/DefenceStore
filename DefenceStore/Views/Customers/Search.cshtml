@@ -45,12 +45,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Password)
             </th>
-            <td>
+            <th>
                 @Html.DisplayNameFor(model => model.Latitude)
-            </td>
-            <td>
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Longitude)
-            </td>
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsAdmin)
             </th>
@@ -97,8 +97,8 @@
                         @Html.DisplayFor(modelItem => item.IsAdmin)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit" }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete" }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "edit" }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete" }) 
                         @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "details" })
                     </td>
                 </tr>

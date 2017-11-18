@@ -96,17 +96,17 @@
                         @Html.DisplayFor(modelItem => Model.products[i].Product.Price)
                         @Html.HiddenFor(model => Model.products[i].Product.Price)
                     </td>
-                    <th>
+                    <td>
                         <div class="form-group">
                             <div class="col-md-10">
                                 @Html.EditorFor(modelItem => Model.products[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(modelItem => Model.products[i].Quantity, "", new { @class = "text-danger", max=20, min=1 })
                             </div>
                         </div>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         @(Model.products[i].Quantity * Model.products[i].Product.Price)
-                    </th>
+                    </td>
                     <td>
                         @Html.ActionLink("Remove", "Delete", "OrderProducts", new { Model.products[i].ID }, null)
                     </td>
