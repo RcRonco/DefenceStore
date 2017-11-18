@@ -215,7 +215,7 @@ namespace DefenceStore.Controllers
 
             IEnumerable<Customer> queryResult =
                 from cust in db.Customers
-                where cust.Latitude != 0 || cust.Longitude != 0
+                where cust.Latitude != 0 && cust.Longitude != 0
                 select cust;
 
             string fullname = "";
