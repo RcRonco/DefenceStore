@@ -23,10 +23,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Manufactor.Name)
+            Manufactor @Html.DisplayNameFor(model => model.Manufactor.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Product @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Desciption)
@@ -64,7 +64,7 @@
                     @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
                     @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" })
                     @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })
-                    @Html.ActionLink("Share Product", "ShareProduct", new { id = item.ID });
+                    @Html.ActionLink("Share Product", "ShareProduct", new { id = item.ID }, new { @class = "share" });
                 </td>
             </tr>
         }

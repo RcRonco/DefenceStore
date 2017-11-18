@@ -37,12 +37,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Price)
             </td>
-            <th>
+            <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
-            </th>
-            <th>
+            </td>
+            <td>
                 @(item.Quantity * item.Product.Price)
-            </th>
+            </td>
         </tr>
     }
     <tr>
