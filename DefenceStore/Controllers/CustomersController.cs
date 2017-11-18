@@ -28,12 +28,19 @@ namespace DefenceStore.Controllers
 
         public ActionResult Recommended()
         {
+            IEnumerable<Product> rec_products = null;
             if (Session["Customer"] == null)
+                rec_products = Helpers.Recommender.getProducts(db, -1, 4);
+            else
+                rec_products = Helpers.Recommender.getProducts(db, (Session["Customer"] as Customer).ID, 4);
+
+            foreach (Product p in rec_products)
             {
-                return PartialView(Helpers.Recommender.getProducts(db, -1));
+                if (p.Image == null || p.Image == string.Empty)
+                    p.Image = "https://www.jainsusa.com/images/store/landscape/not-available.jpg";
             }
 
-            return PartialView(Helpers.Recommender.getProducts(db, (Session["Customer"] as Customer).ID));
+            return PartialView(rec_products);
         }
 
         // GET: Customers/Details/5

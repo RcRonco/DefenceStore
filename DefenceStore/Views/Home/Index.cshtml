@@ -2,12 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 
-<br/>
-@Html.Action("Recommended", "Customers")
-<br />
-<br />
-<br />
-<br />
 <div style="position: relative;">
     <canvas id="canvas" width="1200" height="250"></canvas>
     <script>
@@ -23,6 +17,9 @@
     </script>
 </div>
 <br />
+<div class="row">
+    @Html.Action("Recommended", "Customers")
+</div>
 <div class="row">
     <div class="col-md-6" style="padding-right: 40px;">
         <div id="fb-root"></div>

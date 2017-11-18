@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<DefenceStore.Models.Product>
-<head>
-    <title>Bootstrap E-Commerce Template- DIGI Shop mini</title>
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!-- Fontawesome core CSS -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <!--GOOGLE FONT -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-    <!--Slide Show Css -->
-    <link href="assets/ItemSlider/css/main-style.css" rel="stylesheet">
-    <!-- custom CSS here -->
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
+
+<style>
+    .col-container {
+    display: table; 
+    width: 100%; 
+}
+
+.col {
+    display: table-cell;
+}
+
+</style>
+
 <h2>Recommended</h2>
 <div class="container">
-    <div class="row">
+    <div class="row match-to-row">
         @foreach (var item in Model)
         {
             <div class="col-md-3 text-center col-sm-6 col-xs-6">
                 <div class="thumbnail product-box">
-                    <img src="@Html.DisplayFor(modelItem => item.Image)" alt="">
+                    <img src="@Html.DisplayFor(modelItem => item.Image)">
                     <div class="caption">
                         <h3><a href="#">@Html.DisplayFor(modelItem => item.Name) </a></h3>
                         <p>Price : <strong>$ @Html.DisplayFor(modelItem => item.Price)</strong>  </p>
@@ -31,47 +31,3 @@
         }
     </div>
 </div>
-        <table class="table">
-            <tr>
-                <th>
-                    Manufactor @Html.DisplayNameFor(model => model.Manufactor.Name)
-                </th>
-                <th>
-                    Product @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Desciption)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Manufactor.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Desciption)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Image)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.ActionLink(".", "Add", "Products", new { id = item.ID }, new { @class = "add" })
-                        @Html.ActionLink(".", "Details", "Products", new { id = item.ID }, new { @class = "details" })
-                    </td>
-                </tr>
-            }
-        </table>
