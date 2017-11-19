@@ -341,7 +341,7 @@ namespace DefenceStore.Controllers
                 from order in db.Orders
                 select new
                 {
-                    OrderDate = ((DateTime)order.Date).ToString()
+                    OrderDate = ((DateTime)order.Date).ToString().Substring(0, ((DateTime)order.Date).ToString().IndexOf(" "))
                 };
 
             var final = from order in queryResult
