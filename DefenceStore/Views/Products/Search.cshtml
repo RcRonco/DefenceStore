@@ -13,7 +13,7 @@
 @using (Html.BeginForm("Search", "Products", FormMethod.Get))
 {
     <p>
-        Name: @Html.TextBox("name")
+        Product Name: @Html.TextBox("name")
         Description @Html.TextBox("description")
         Price: <input type="number" min="0" step="1" name="price" id="price" />
         <input type="submit" value="Filter" />
@@ -60,11 +60,22 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
+                    @{
+                        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        {
+                            @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" });
+                        }
+                    }
+                    @{
+                        if (Session["Customer"] != null && ((DefenceStore.Models.Customer)Session["Customer"]).IsAdmin)
+                        {
+                            @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" });
+
+                        }
+                    }
                     @Html.ActionLink(".", "Add", new { id = item.ID }, new { @class = "add" })
-                    @Html.ActionLink(".", "Delete", new { id = item.ID }, new { @class = "delete" })
-                    @Html.ActionLink(".", "Edit", new { id = item.ID }, new { @class = "edit" })
                     @Html.ActionLink(".", "Details", new { id = item.ID }, new { @class = "details" })
-                    @Html.ActionLink("Share Product", "ShareProduct", new { id = item.ID }, new { @class = "share" });
+                    @Html.ActionLink("Share Product", "ShareProduct", new { id = item.ID }, new { @class = "share" })
                 </td>
             </tr>
         }
