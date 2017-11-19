@@ -78,7 +78,7 @@ namespace DefenceStore.Controllers
             {
                 return Redirect("UserNotFound");
             }
-            int? cid = ((Customer)Session["Customer"]).ID;
+            int? cid = (Session["Customer"] as Customer).ID;
             List<Product> products = Session["Products"] as List<Product>;
 
             if (products == null || products.Count < 1)
@@ -92,10 +92,13 @@ namespace DefenceStore.Controllers
 
             var UserOrders = db.Orders.Where(o => o.CustomerID == cid.Value).ToList<Order>();
 
+            if (UserOrders.Count > 0)
+            {               
+                order.BillingType = UserOrders[UserOrders.Count - 1].BillingType;
+                order.Address = UserOrders[UserOrders.Count - 1].Address;
+            }
 
             order.Date = DateTime.Now;
-            order.BillingType = UserOrders[UserOrders.Count - 1].BillingType;
-            order.Address = UserOrders[UserOrders.Count - 1].Address;
             order.products = new List<OrderProduct>();
 
             foreach (Product prod in products)
@@ -110,7 +113,12 @@ namespace DefenceStore.Controllers
                 });
             }
 
-            ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
+
+            if ((Session["Customer"] as Customer).IsAdmin)
+                ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName");
+            else
+                ViewBag.CustomerID = new SelectList(db.Customers, "ID", "FirstName").Where(c => c.Value == cid.Value.ToString());
+
             return View(order);
         }
 
