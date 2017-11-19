@@ -18,7 +18,7 @@
 @using (Html.BeginForm("Search", "Products", FormMethod.Get))
 {
     <p>
-        Name: @Html.TextBox("name")
+        Product Name: @Html.TextBox("name")
         Description @Html.TextBox("description")
         Price: <input type="number" min="0" step="1" name="price" id="price" />
         <input type="submit" value="Filter" />
